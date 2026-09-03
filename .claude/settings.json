@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/grcampos/AppData/Local/Temp/**)",
+      "Bash(curl -s http://localhost:4321/ -o \"C:\\\\Users\\\\grcampos\\\\AppData\\\\Local\\\\Temp\\\\home_rendered2.html\")",
+      "Bash(curl -s http://localhost:4321/ -o \"C:\\\\Users\\\\grcampos\\\\AppData\\\\Local\\\\Temp\\\\home_rendered3.html\")"
+    ]
+  }
+}

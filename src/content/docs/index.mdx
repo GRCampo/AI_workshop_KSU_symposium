@@ -1,40 +1,109 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: 'Working Smarter with AI'
+description: 'A hands-on workshop on using AI tools like Claude as a real partner in scientific data analysis, while building the critical-thinking habits that keep you in control.'
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  title: 'Working Smarter with AI<span class="hero-subtitle">Practical tools and critical thinking for scientific data analysis</span>'
+  tagline: '<p class="home-context">This workshop is part of the "From Students, For Students" series, held during the 2026 Kansas State University Symposium: Essential Overlaps for Crop Improvement — Building Bridges to Close Gaps, part of the Corteva Symposia Series.</p>'
   image:
-    file: ../../assets/houston.webp
-  actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
+    html: '<img src="/AI_workshop_KSU_symposium/hero-illustration.png" alt="Illustration representing the workshop theme" />'
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkButton } from '@astrojs/starlight/components';
 
-## Next steps
+<section class="home-summary">
+	<h2>Thinking With AI, Not Through It</h2>
+	<div class="home-subtitle">
+		Using artificial intelligence without becoming artificially intelligent.
+	</div>
+	<div class="home-body">
+		This hands-on workshop is about how to get the most out of generative AI (Claude, GPT, and
+		others) in scientific research.
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+		We'll explore how to use AI tools as a real partner in scientific data analysis, from data
+		wrangling to interpretation, while building the critical-thinking habits that keep you in
+		control: what to verify, when to question the output, and how to avoid quietly outsourcing your
+		judgment. 
+		
+		No AI expertise required.
+	</div>
+</section>
+
+<div class="home-cta">
+	<LinkButton href="/AI_workshop_KSU_symposium/before-workshop/requirements/" icon="right-arrow">
+		Let's start
+	</LinkButton>
+</div>
+
+<section class="home-about">
+	<h2>About Me</h2>
+
+	<div class="home-bio-stack">
+		<img
+			src="/AI_workshop_KSU_symposium/time_line_profi.png"
+			alt="Timeline of academic and research projects"
+			class="home-bio-image"
+		/>
+		<div class="home-ai-block">
+			I graduated in <strong>Agronomic Engineering from ESALQ, University of São Paulo</strong>. I
+			chose it six months before the admission exam and surprised almost everyone who knew me. I
+			looked at where the demand was, looked at what I was actually good at (biology and math), and
+			the two lined up. <em>I had no idea how much I would end up liking it!</em>
+
+			During my second year, I took a genetics course. For someone with no previous experience in
+			genetics, seeing Mendelian predictions from a Punnett square actually show up in real plants
+			felt almost like magic. <em>That was when I realized this was what I wanted to do.</em>
+
+			My first project was with maize doubled haploid lines: out to the field, crossing selected
+			genotypes, selecting the progeny, back to the field again. It was also where I first had to
+			analyze my own experimental data. The analyses were simple, though at the time they felt like
+			rocket science, and learning R turned data analysis into a puzzle.
+
+			<em>R became one of my favorite tools.</em> Python eventually joined the story, when I moved
+			from traditional breeding into image-based phenotyping, but R will always have a special place
+			in my heart.
+
+			Then, during my <strong>Master's in Genetics and Plant Breeding</strong>, I moved into
+			<em>plant–pathogen interactions and bioinformatics</em>: complex biological data, multiple
+			computational tools, software versions, dependencies, and pipelines that occasionally seemed
+			personally offended by my existence. More importantly, I had to learn how to turn complex data
+			into information that could answer a biological question.
+
+			And that is how I ended up here.
+
+			Today I'm a PhD student building genomics and phenomics pipelines for wheat introgression
+			lines, and most of the data I touch is not public.
+		</div>
+	</div>
+
+	<div class="home-ai-block">
+		I have been working with generative AI since the days when ChatGPT could not count the r's in "strawberry" while confidently explaining its answer like a Nobel Prize winner.
+
+		Models are much better now, and in some ways much more intimidating. After using these tools for a while — making them fail, watching them succeed, and occasionally both in the same conversation — I learned that using AI well depends on understanding what a model can do, what it cannot, and where I still need to think for myself.
+
+		<em>Curiosity</em> made me explore what these tools could actually do, and a healthy amount of <em>paranoia</em> made me ask what they were doing with my data.
+
+		Repeated trial and error taught me where the useful shortcuts end and where scientific judgment has to take over.
+
+		<p><strong>That is the perspective I bring to this workshop.</strong></p>
+	</div>
+
+	<div class="home-bio-stack">
+		<img
+			src="/AI_workshop_KSU_symposium/time_line_pessoal.png"
+			alt="Timeline of personal life events"
+			class="home-bio-image"
+		/>
+		<div class="home-ai-block">
+			I also use generative AI well beyond research.
+
+			I use it to adapt recipes, find book recommendations, and try to keep my houseplants alive —
+			which, for someone who studies plants for a living, is a humbling and ongoing project.
+
+			I am Brazilian and very lucky to have my family with me through all of this.
+
+			I'm married, and my husband and I are both scientists with surprisingly similar backgrounds,
+			but he tends to take the theoretical route, while I somehow always end up applying things.
+		</div>
+	</div>
+</section>

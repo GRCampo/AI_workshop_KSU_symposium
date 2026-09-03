@@ -1,0 +1,411 @@
+---
+title: Privacy & Security
+tableOfContents: false
+---
+
+<div class="featured-source">
+	<a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer" class="featured-source-heading">OpenAI says its models escaped their sandbox and breached Hugging Face</a>
+</div>
+
+<div class="incident-body">
+	<p>In July 2026, OpenAI was running two models against ExploitGym, a benchmark that tests whether an AI system can turn a known vulnerability into a working exploit.</p>
+	<p>The models were in an isolated environment with no internet access (a sandbox). Instead of solving the problems as expected	, one model found a flaw in OpenAI's own infrastructure, used it to reach the open internet, and chained stolen credentials with further vulnerabilities to reach Hugging Face's production servers. <strong>There it read the benchmark's answer key directly from the database.</strong></p>
+<div class="incident-body">
+
+<img src="/AI_workshop_KSU_symposium/sand_box_A.png" alt="Diagram: a model leaves its own sandbox to take moulds from another one, and both paths produce the same castle" class="privacy-image-full" />
+
+</div>	
+	<p>Hugging Face detected and contained the intrusion five days before OpenAI connected the activity to its own testing. In its write-up, <strong>OpenAI described the models as hyperfocused</strong> on solving ExploitGym, going to extreme lengths for a narrow testing goal.</p>
+	<p>The instruction was to pass the test; staying within the sandbox was not part of the instructions.</p>
+</div>
+
+<div class="privacy-columns">
+	<img src="/AI_workshop_KSU_symposium/sand_box_B.png" alt="A child on a swing, absorbed in it" class="privacy-columns-image" />
+	<div class="privacy-columns-text">
+		<p><strong>When we use a tool, we focus on what we need from it.</strong></p>
+		<p>Think of the chat as the swing. While you are on it, nothing around it registers and the playground stops existing. <strong>But the playground is still there, and it is the part that decides where your data goes.</strong></p>
+		<div class="privacy-assumptions">
+			<p>"I only pasted the header and a few rows."</p>
+			<p>"It's my institutional account, so it's covered."</p>
+			<p>"I deleted the conversation afterwards."</p>
+		</div>
+	</div>
+</div>
+
+<div class="incident-body">
+	<p><strong>The swing is part of a larger structure. It was built by someone, it is attached to something, and it sits in a space you don't control.</strong></p>
+</div>
+
+<img src="/AI_workshop_KSU_symposium/sand_box_C.png" alt="The full playground, with the chat, the provider, the leak, and the other sandbox labelled" class="privacy-image-full" />
+
+<h2>What do you think is true?</h2>
+
+<div class="privacy-quiz">
+	<div class="privacy-quiz-item">
+		<p class="privacy-quiz-statement">Paying for ChatGPT Plus or Claude Pro stops your conversations from being used for training.</p>
+		<div class="privacy-quiz-buttons">
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="true">True</button>
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="false">False</button>
+		</div>
+		<div class="privacy-quiz-answer">
+			<p class="privacy-quiz-answer-label">Answer: False</p>
+			<p class="privacy-quiz-answer-text">Paying buys capability, not protection. On both, the consumer tiers train by default and you have to turn it off yourself.</p>
+		</div>
+	</div>
+	<div class="privacy-quiz-item">
+		<p class="privacy-quiz-statement">If you turn off training, your conversations are deleted right away.</p>
+		<div class="privacy-quiz-buttons">
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="true">True</button>
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="false">False</button>
+		</div>
+		<div class="privacy-quiz-answer">
+			<p class="privacy-quiz-answer-label">Answer: False</p>
+			<p class="privacy-quiz-answer-text">Opting out stops training, not storage. Providers keep conversations for a period regardless — typically around 30 days for abuse monitoring.</p>
+		</div>
+	</div>
+	<div class="privacy-quiz-item">
+		<p class="privacy-quiz-statement">Deleting a conversation removes it from the provider's systems.</p>
+		<div class="privacy-quiz-buttons">
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="true">True</button>
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="false">False</button>
+		</div>
+		<div class="privacy-quiz-answer">
+			<p class="privacy-quiz-answer-label">Answer: False</p>
+			<p class="privacy-quiz-answer-text">Deletion removes it from your history. On Gemini, conversations already read by human reviewers are kept separately for up to three years and are not affected by deleting your activity.</p>
+		</div>
+	</div>
+	<div class="privacy-quiz-item">
+		<p class="privacy-quiz-statement">Connecting your Drive lets the tool read only the folder you point it at.</p>
+		<div class="privacy-quiz-buttons">
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="true">True</button>
+			<button type="button" class="privacy-quiz-btn" data-quiz-answer="false">False</button>
+		</div>
+		<div class="privacy-quiz-answer">
+			<p class="privacy-quiz-answer-label">Answer: False</p>
+			<p class="privacy-quiz-answer-text">Connectors inherit your permissions. If your account can open it, the tool can reach it.</p>
+		</div>
+	</div>
+</div>
+
+<script src="/AI_workshop_KSU_symposium/privacy-quiz.js"></script>
+
+<h2>What happens to what you type</h2>
+
+<p>Paying for a subscription does not change the training default for ChatGPT or Claude. The dividing line is consumer versus institutional, not free versus paid.</p>
+
+<div class="privacy-table-wrap">
+<table class="privacy-table">
+	<colgroup>
+		<col style="width: 24ch" />
+		<col style="width: 28ch" />
+		<col style="width: 28ch" />
+		<col style="width: 28ch" />
+		<col style="width: 28ch" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">ChatGPT (OpenAI)</th>
+			<th scope="col">Claude (Anthropic)</th>
+			<th scope="col">Gemini (Google)</th>
+			<th scope="col">M365 Copil	ot</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Trains on your input by default?</th>
+			<td>Yes, on Free and Plus. Opt-out available. No, on Team/Enterprise/API.</td>
+			<td>Yes, on Free, Pro, and Max since Aug 2025. Opt-out available. No, on commercial terms.</td>
+			<td>Yes, on the consumer tier, including paid Google AI Pro.</td>
+			<td>No. Contractual commitment, not a toggle.</td>
+		</tr>
+		<tr>
+			<th scope="row">How to turn it off</th>
+			<td>Settings › Data Controls › "Improve the model for everyone" › Off</td>
+			<td>Settings › Privacy › "Help improve Claude" › Off</td>
+			<td>Gemini Apps Activity settings</td>
+			<td>Not applicable — off by default</td>
+		</tr>
+		<tr>
+			<th scope="row">Retention if you opt out / by default</th>
+			<td>30 days, for abuse monitoring, even with training off</td>
+			<td>30 days, if training is off. 5 years if training is on.</td>
+			<td>18 months default (configurable 3–36 months or indefinite). Chats reviewed by human reviewers are kept separately for up to 3 years regardless of your activity settings.</td>
+			<td>Governed by your institution's tenant retention policy</td>
+		</tr>
+		<tr>
+			<th scope="row">Human reviewers can read your input?</th>
+			<td>For safety and abuse review</td>
+			<td>Not by default — requires consent or a safety flag</td>
+			<td>Yes, explicitly, for quality review</td>
+			<td>Customer feedback is optional and not used to train foundation models</td>
+		</tr>
+		<tr>
+			<th scope="row">Contractual data protection agreement available?</th>
+			<td>Only on Team, Enterprise, Edu, or API with Zero Data Retention</td>
+			<td>Only on Team, Enterprise, API, Bedrock, or Vertex</td>
+			<td>Yes, for Google Workspace for Education — no human review, no training, on qualifying editions</td>
+			<td>Yes, standard on all commercial tenants — this is K-State's current default path</td>
+		</tr>
+		<tr>
+			<th scope="row">What connectors can reach</th>
+			<td>Everything your account can access in the connected service. No folder-level limits.</td>
+			<td>Everything your account can access in the connected service. No folder-level limits.</td>
+			<td>Your full Google account content, including Gmail and Drive, when enabled.</td>
+			<td>Anything you already have permission to open in Microsoft 365. Pre-existing oversharing becomes AI-accessible.</td>
+		</tr>
+		<tr>
+			<th scope="row">Sources</th>
+			<td class="incident-sources"><a href="https://openai.com/policies/us-privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · <a href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener noreferrer">Enterprise Privacy</a></td>
+			<td class="incident-sources"><a href="https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data" target="_blank" rel="noopener noreferrer">Data Retention</a> · <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank" rel="noopener noreferrer">Consumer Terms Update</a></td>
+			<td class="incident-sources"><a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener noreferrer">Gemini Apps Privacy</a> · <a href="https://knowledge.workspace.google.com/admin/generative-ai/generative-ai-in-google-workspace-privacy-hub" target="_blank" rel="noopener noreferrer">Workspace AI Privacy Hub</a></td>
+			<td class="incident-sources"><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-privacy" target="_blank" rel="noopener noreferrer">Copilot Privacy</a> · <a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/enterprise-data-protection" target="_blank" rel="noopener noreferrer">Enterprise Data Protection</a></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="privacy-table-mobile">
+	<div class="privacy-table-card">
+		<h3>ChatGPT (OpenAI)</h3>
+		<dl>
+			<dt>Trains on your input by default?</dt>
+			<dd>Yes, on Free and Plus. Opt-out available. No, on Team/Enterprise/API.</dd>
+			<dt>How to turn it off</dt>
+			<dd>Settings › Data Controls › "Improve the model for everyone" › Off</dd>
+			<dt>Retention if you opt out / by default</dt>
+			<dd>30 days, for abuse monitoring, even with training off</dd>
+			<dt>Human reviewers can read your input?</dt>
+			<dd>For safety and abuse review</dd>
+			<dt>Contractual data protection agreement available?</dt>
+			<dd>Team, Enterprise, Edu, or API with Zero Data Retention</dd>
+			<dt>What connectors can reach</dt>
+			<dd>Everything your account can access in the connected service. No folder-level limits.</dd>
+			<dt>Sources</dt>
+			<dd class="incident-sources"><a href="https://openai.com/policies/us-privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · <a href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener noreferrer">Enterprise Privacy</a></dd>
+		</dl>
+	</div>
+	<div class="privacy-table-card">
+		<h3>Claude (Anthropic)</h3>
+		<dl>
+			<dt>Trains on your input by default?</dt>
+			<dd>Yes, on Free, Pro, and Max since Aug 2025. Opt-out available. No, on commercial terms.</dd>
+			<dt>How to turn it off</dt>
+			<dd>Settings › Privacy › "Help improve Claude" › Off</dd>
+			<dt>Retention if you opt out / by default</dt>
+			<dd>30 days, if training is off. 5 years if training is on.</dd>
+			<dt>Human reviewers can read your input?</dt>
+			<dd>Not by default. Requires consent or a safety flag</dd>
+			<dt>Contractual data protection agreement available?</dt>
+			<dd>Team, Enterprise, API, Bedrock, or Vertex</dd>
+			<dt>What connectors can reach</dt>
+			<dd>Everything your account can access in the connected service. No folder-level limits.</dd>
+			<dt>Sources</dt>
+			<dd class="incident-sources"><a href="https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data" target="_blank" rel="noopener noreferrer">Data Retention</a> · <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank" rel="noopener noreferrer">Consumer Terms Update</a></dd>
+		</dl>
+	</div>
+	<div class="privacy-table-card">
+		<h3>Gemini (Google)</h3>
+		<dl>
+			<dt>Trains on your input by default?</dt>
+			<dd>Yes, on the consumer tier, including paid Google AI Pro.</dd>
+			<dt>How to turn it off</dt>
+			<dd>Gemini Apps Activity settings</dd>
+			<dt>Retention if you opt out / by default</dt>
+			<dd>18 months default (configurable 3–36 months or indefinite). Chats reviewed by human reviewers are kept separately for up to 3 years regardless of your activity settings.</dd>
+			<dt>Human reviewers can read your input?</dt>
+			<dd>Yes, explicitly, for quality review</dd>
+			<dt>Contractual data protection agreement available?</dt>
+			<dd>Yes, for Google Workspace for Education — no human review, no training, on qualifying editions</dd>
+			<dt>What connectors can reach</dt>
+			<dd>Your full Google account content, including Gmail and Drive, when enabled.</dd>
+			<dt>Sources</dt>
+			<dd class="incident-sources"><a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener noreferrer">Gemini Apps Privacy</a> · <a href="https://knowledge.workspace.google.com/admin/generative-ai/generative-ai-in-google-workspace-privacy-hub" target="_blank" rel="noopener noreferrer">Workspace AI Privacy Hub</a></dd>
+		</dl>
+	</div>
+	<div class="privacy-table-card">
+		<h3>M365 Copilot</h3>
+		<dl>
+			<dt>Trains on your input by default?</dt>
+			<dd>No. Contractual commitment, not a toggle.</dd>
+			<dt>How to turn it off</dt>
+			<dd>Off by default</dd>
+			<dt>Retention if you opt out / by default</dt>
+			<dd>Governed by your institution's retention policy</dd>
+			<dt>Human reviewers can read your input?</dt>
+			<dd>Customer feedback is optional and not used to train foundation models</dd>
+			<dt>Contractual data protection agreement available?</dt>
+			<dd>Yes, standard on all commercial tenants — this is K-State's current default path</dd>
+			<dt>What connectors can reach</dt>
+			<dd>Anything you already have permission to open in Microsoft 365. Pre-existing oversharing becomes AI-accessible.</dd>
+			<dt>Sources</dt>
+			<dd class="incident-sources"><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-privacy" target="_blank" rel="noopener noreferrer">Copilot Privacy</a> · <a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/enterprise-data-protection" target="_blank" rel="noopener noreferrer">Enterprise Data Protection</a></dd>
+		</dl>
+	</div>
+</div>
+<p class="incident-sources">This is not legal or compliance advice. Verify current terms before relying on this table for anything sensitive.</p>
+
+<div class="featured-source">
+	<h3>It is not only DeepSeek</h3>
+	<div class="incident-body">
+		Other states publish much longer lists.
+
+		<ul>
+			<li>April/2026: <a href="https://it.ufl.edu/security/security-guidance/prohibited-technologies/" target="_blank" rel="noopener noreferrer">Florida's Department of Management Services</a> prohibited-applications list includes DeepSeek alongside Kimi, MiniMax Agent, Z.AI, iFlytek Spark, and others.</li>
+			<li><a href="https://gov.texas.gov/news/post/governor-abbott-updates-texas-prohibited-technologies-list" target="_blank" rel="noopener noreferrer">Texas</a> updated its prohibited technologies list in January 2026 with additional restrictions on hardware, AI, and software affiliated with the People’s Republic of China (PRC) and the Chinese Communist Party (CCP).</li>
+		</ul>
+
+		<strong>Model versus service is a distinction institutions disagree about.</strong> Three positions exist side by side, and none of them has settled the question.
+
+		<p><strong><a href="https://privacymatters.ubc.ca/i-want/safe-deepseek-ubc" target="_blank" rel="noopener noreferrer">UBC</a> and <a href="https://research.msu.edu/security/non-us-gen-ai-tools" target="_blank" rel="noopener noreferrer">Michigan State</a>:</strong> the hosted app sends data to servers in China. Open weights downloaded from a reputable source and run offline remove that concern.</p>
+
+		<p><strong><a href="https://www.cyber.tamus.edu/blog/2025/02/05/updated-prohibited-tech-guidance/" target="_blank" rel="noopener noreferrer">The Texas A&M System</a>:</strong> took the opposite position. Because the prohibition applies to developers and all their products, the system presumes the open-source DeepSeek LLM is included.</p>
+
+		<p><strong><a href="https://www.congress.gov/bill/119th-congress/senate-bill/2177/text" target="_blank" rel="noopener noreferrer">Federal procurement</a>:</strong> follows the developer, not the host. The FY2026 NDAA requires the Department of Defense to exclude AI developed by DeepSeek or High-Flyer, and the pending No Adversarial AI Act (S. 2177 / H.R. 4142) would extend a list-based approach government-wide. Under that logic, DeepSeek served from a US data center is still DeepSeek.</p>
+
+		<strong>The practical consequence:</strong> a US-branded interface can be serving a Chinese model underneath. Check which model a platform actually routes to before using it on a K-State network.
+
+		A <a href="https://www.federalregister.gov/documents/2025/12/16/2025-23092/ensuring-a-national-policy-framework-for-artificial-intelligence" target="_blank" rel="noopener noreferrer">December 2025 federal executive order</a> sets out to preempt state AI laws. It instructs officials to draft federal legislation that leaves state government procurement and use of AI alone, which is the category HB 2313 falls into.
+	</div>
+</div>
+
+
+<h2>Am I allowed to use this at all?</h2>
+
+<div class="incident-body privacy-controls-lead">Three separate authorities decide that:</div>
+
+<div class="privacy-columns privacy-controls-row">
+	<img src="/AI_workshop_KSU_symposium/three_controls.png" alt="Three numbered icons: a government building, a graduation cap on a library, and a group of people with a dollar sign" class="privacy-columns-image privacy-controls-image" />
+	<div class="privacy-columns-text">
+		<dl class="privacy-authorities">
+			<dd><strong>State law</strong> can make a use illegal.</dd>
+			<dd><strong>University policy</strong> can make it a violation.</dd>
+			<dd><strong>Funding agencies and journals rules</strong> can turn an undisclosed AI assist into research misconduct.</dd>
+		</dl>
+	</div>
+</div>
+
+<h3>State law</h3>
+
+<div class="incident-body">
+	<a href="https://www.kslegislature.gov/b2025_26/bills/hb2313/" target="_blank" rel="noopener noreferrer">Kansas HB 2313</a> (Senate Sub. for HB 2313) was signed by Governor Laura Kelly on 8 April 2025 and took effect 1 July 2025, as <a href="https://sos.ks.gov/publications/sessionlaws/2025/Chapter-84-HB-2313.html" target="_blank" rel="noopener noreferrer">Chapter 84 of the 2025 Session Laws</a>. <strong>It bans “artificial intelligence platforms of concern” on any state-agency device or network</strong>, and requires existing accounts to be deactivated and deleted.
+
+	<strong>DeepSeek</strong> is the only platform named directly in the statute. The law also reaches any model controlled, directly or indirectly, by a country of concern: China, including Hong Kong, Cuba, Iran, North Korea, Russia, and Venezuela.
+
+	<a href="https://sos.ks.gov/publications/sessionlaws/2025/Chapter-84-HB-2313.html" target="_blank" rel="noopener noreferrer">Section 2</a> of the same law <strong>bans genetic sequencers and genetic-analysis software produced by a foreign adversary at medical and research facilities</strong>.
+</div>
+
+<h3>Institution</h3>
+
+<div class="incident-body">
+	<p>Universities are writing detailed rules about what may and may not be used.</p>
+	<p>The rules differ from each other, and <strong>they are more specific than most researchers expect.</strong></p>
+</div>
+
+<div class="institution-grid">
+	<div class="institution-cell privacy-table-card">
+		<img src="/AI_workshop_KSU_symposium/universityRules1.png" alt="University of Minnesota seal" class="institution-mark" />
+		<p class="incident-title">University of Minnesota</p>
+		<ul>
+			<li>A <a href="https://it.umn.edu/services-technologies/resources/artificial-intelligence-appropriate-use" target="_blank" rel="noopener noreferrer"><strong>tool-by-tool matrix</strong></a> says which data class each AI tool may receive</li>
+			<li>ChatGPT on an individual licence: public data only</li>
+			<li>Clickwrap terms are contracts, and must go to General Counsel before acceptance</li>
+		</ul>
+	</div>
+	<div class="institution-cell privacy-table-card">
+		<img src="/AI_workshop_KSU_symposium/universityRules2.png" alt="Purdue University seal" class="institution-mark" />
+		<p class="incident-title">Purdue University</p>
+		<ul>
+			<li>A written <a href="https://www.purdue.edu/vpec/policies/information-technology/viia5/" target="_blank" rel="noopener noreferrer"><strong>AI use policy</strong></a>, in force since 1 November 2025</li>
+			<li>Sensitive and Restricted data need prior approval and a Data Ethics Committee review</li>
+			<li>Uploading non-public data without approval must be reported as a security incident</li>
+		</ul>
+	</div>
+	<div class="institution-cell privacy-table-card">
+		<img src="/AI_workshop_KSU_symposium/universityRules3.png" alt="Cornell University seal" class="institution-mark" />
+		<p class="incident-title">Cornell University</p>
+		<ul>
+			<li>A <a href="https://research-and-innovation.cornell.edu/generative-ai-in-academic-research/" target="_blank" rel="noopener noreferrer"><strong>task force report</strong></a> organised by research stage, framed as internal advice rather than binding rules</li>
+			<li>Three duties on the researcher: verification, disclosure, discretion</li>
+			<li>Do not assume GenAI is private, and do not share confidential or export-controlled material</li>
+		</ul>
+	</div>
+	<div class="institution-cell privacy-table-card">
+		<img src="/AI_workshop_KSU_symposium/universityRules4.png" alt="Washington State University seal" class="institution-mark" />
+		<p class="incident-title">Washington State University</p>
+		<ul>
+			<li><a href="https://research.wsu.edu/guidelines-policies/generative-ai" target="_blank" rel="noopener noreferrer"><strong>Office of Research guidelines</strong></a> covering proposals, statistical analysis, and figures</li>
+			<li>Sensitive data should generally not go into externally sourced tools</li>
+			<li>The same caution extends to AI meeting tools</li>
+		</ul>
+	</div>
+</div>
+
+<div class="featured-source">
+	<h4>K-State created a task force.</h4>
+	<div class="incident-body">
+		<p>A <a href="https://www.k-state.edu/news/articles/2025/11/university-task-force-responsible-artificial-intelligence.html" target="_blank" rel="noopener noreferrer"><strong>University Task Force on Responsible Use of Generative AI</strong></a>, established <strong>November 2025</strong>, charged with developing policy, guidelines and training on the use and procurement of generative AI. Five working groups, including Research and Intellectual Property. Protection of unpublished research data is named in its charge.</p>
+		<p><strong>What exists so far:</strong> As of September 2026, no report and no adopted policy. The <a href="https://www.k-state.edu/arm/records/topics/best-practices/Using%20Generative%20AI%20with%20University%20Owned%20Records%20and%20Data%20Policy%20-%20Copy.pdf" target="_blank" rel="noopener noreferrer"><strong>draft policy</strong></a> still has no chapter number. What governs today:</p>
+		<ul>
+			<li>The <a href="https://www.k-state.edu/arm/records/topics/best-practices/Updated-Using%20Generative%20AI%20Guidance_8.6.25.pdf" target="_blank" rel="noopener noreferrer"><strong>August 2025 guidance</strong></a><ul><li>Approved through Single Sign-On: M365 Copilot, Adobe Firefly, Zoom AI Companion</li><li>Prohibited: DeepSeek</li><li>Not approved: Otter.ai, Read AI</li></ul></li>
+			<li><a href="https://www.k-state.edu/policies/ppm/3400/3433.html" target="_blank" rel="noopener noreferrer"><strong>PPM 3433</strong></a>: data is Internal Only by default, and only a Data Steward can reclassify it as Public</li>
+			<li>Accepting a tool's clickthrough terms without university approval can carry personal liability</li>
+		</ul>
+		<p>No K-State guidance addresses using AI for data analysis specifically. The rules above are what applies until the task force publishes.</p>
+	</div>
+</div>
+
+<h3>Funding agencies and journals</h3>
+
+<h4>Funding agencies</h4>
+
+<div class="incident-body">
+	<p>Funders now regulate three different things — how you write, how you review, and where your data goes.</p>
+	<p><strong>How you write</strong></p>
+	<ul>
+		<li>NIH: applications <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-132.html" target="_blank" rel="noopener noreferrer">substantially developed by AI</a> are not the applicant's original ideas; each PI capped at six applications per calendar year (effective 25 Sep 2025)</li>
+		<li>NSF: disclosure of AI use is encouraged, and the <a href="https://www.nsf.gov/policies/document/pappg24-1-supplement-1" target="_blank" rel="noopener noreferrer">misconduct definition</a> now explicitly covers fabrication, falsification or plagiarism committed through AI-based tools</li>
+	</ul>
+	<p><strong>How you review</strong></p>
+	<ul>
+		<li>NIH <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-23-149.html" target="_blank" rel="noopener noreferrer">prohibits reviewers</a> from using generative AI to analyze or write critiques (since 2023)</li>
+		<li>NSF <a href="https://www.nsf.gov/news/notice-to-the-research-community-on-ai" target="_blank" rel="noopener noreferrer">prohibits reviewers</a> from uploading proposal content to non-approved AI tools</li>
+	</ul>
+	<p><strong>Where your data goes</strong></p>
+	<p>For NIH controlled-access human genomic data, <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-081.html" target="_blank" rel="noopener noreferrer">NOT-OD-25-081</a> (March 2025) states:</p>
+		<ul>
+			<li>Typing it into a public AI tool, even as a prompt, violates the Data Use Certification</li>
+			<li>A generative AI model trained on it is a Data Derivative — the model itself, including its parameters, inherits the data's restrictions and cannot be retained at project closeout</li>
+		</ul>
+	<p>Plant data is not covered — but the pattern is the direction of travel, and collaborators with human or animal data are already inside it.</p>
+	
+	<p>By April 2026, NSF was already forwarding AI-related misconduct allegations to universities — the <a href="https://list.cals.arizona.edu/pipermail/staff/2026-April/000238.html" target="_blank" rel="noopener noreferrer">research dean</a> of Arizona's agriculture college told faculty his institution had received two.</p>
+
+</div>
+
+<div class="featured-source">
+	<a href="https://nexus.od.nih.gov/all/2023/06/23/using-ai-in-peer-review-is-a-breach-of-confidentiality/" target="_blank" rel="noopener noreferrer" class="featured-source-heading">"Using AI in Peer Review Is a Breach of Confidentiality"</a>
+	<p class="featured-source-line">Michael Lauer, NIH Deputy Director for Extramural Research, June 2023.</p>
+</div>
+
+<div class="incident-body">
+</div>
+
+<h4>Journals</h4>
+
+<div class="incident-body">
+	<ul>
+		<li>AI cannot be an author, at any journal</li>
+		<li>AI use must be disclosed in Methods</li>
+		<li>AI-generated images are prohibited by most major publishers (<a href="https://www.springer.com/gp/editorial-policies/artificial-intelligence--ai-/25428500" target="_blank" rel="noopener noreferrer">Springer Nature</a>, <a href="https://www.science.org/content/page/science-journals-editorial-policies" target="_blank" rel="noopener noreferrer">Science</a>, <a href="https://www.elsevier.com/about/policies-and-standards/the-use-of-generative-ai-and-ai-assisted-technologies-in-writing-for-elsevier" target="_blank" rel="noopener noreferrer">Elsevier</a>)</li>
+		<li>Reviewers must never upload a manuscript under review into an AI tool</li>
+	</ul>
+</div>
+
+<blockquote class="closing-quote">
+		<p>"it’s naive for people to think that we can afford to not think about safety risks because we want these AIs to solve cancer or things like this. We have safety problems now. We can’t wait to think about this."</p>
+		<footer class="closing-quote-attribution"><a href="https://news.harvard.edu/gazette/story/2026/08/when-ai-goes-rogue/" target="_blank" rel="noopener noreferrer">James Mickens, Gordon McKay Professor of Computer Science at SEAS and director of the Berkman Klein Center at Harvard</a></footer>
+</blockquote>
+
+
+

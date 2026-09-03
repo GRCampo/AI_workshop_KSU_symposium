@@ -1,0 +1,189 @@
+---
+title: Research Tools
+tableOfContents: false
+---
+
+<h2>You still have to check</h2>
+
+<div class="incident-body">
+	<p>Up to now we have discussed how models fail and how to protect your data. Now I want to discuss what they do with your question.</p>
+	<p>None of this is a reason to stop using these tools - <a href="https://www.wiley.com/en-us/about-us/ai/study/researchers" target="\_blank" rel="noopener noreferrer">84% of researchers have not stopped</a>. But convenience is not a reason to set aside critical thinking either. <strong>Telling a real finding from a convincing invention is still part of the work, and it is still ours.</strong></p>
+	<p>Asked in 2024 how long it would take for AI to become commonly accepted in their field, most researchers answered: <strong>under two years.</strong> That came from a <a href="https://www.nature.com/articles/d41586-025-00343-5" target="\_blank" rel="noopener noreferrer">Wiley study</a> covering around 5,000 researchers in more than 70 countries, across writing, reviewing and research design.</p>
+	<p></p>
+</div>
+
+<figure class="incident-evidence">
+	<img src="/AI_workshop_KSU_symposium/hallucination_1.png" alt="Nature bar chart: researcher survey on how soon various AI uses, from writing documentation to experimental design, will gain majority acceptance." class="incident-evidence-image incident-evidence-image--narrow" />
+	<figcaption class="incident-evidence-caption"><a href="https://www.nature.com/articles/d41586-025-00343-5" target="_blank" rel="noopener noreferrer">Nature, February 2025, on the Wiley ExplanAItions study</a></figcaption>
+</figure>
+
+<div class="incident-body">
+	<p><a href="https://www.wiley.com/en-us/about-us/ai/study/researchers" target="_blank" rel="noopener noreferrer">2,430 researchers surveyed in August 2025</a>, AI use for any aspect of work had risen from 57% to 84%, and <strong>use for research or publication tasks from 45% to 62%</strong>.</p>	
+	<p>That growth did not happen in a vacuum. The tools got better as people adopted them, and on this particular failure they got measurably better. <a href="https://doi.org/10.1038/s41598-023-41032-5" target="_blank" rel="noopener noreferrer">Walters & Wilder</a> generated 636 citations across 84 literature reviews on 42 topics: 55% of GPT-3.5's citations were fabricated, against 18% for GPT-4.</p>
+	<p></p>
+</div>
+
+<figure class="incident-evidence">
+	<img src="/AI_workshop_KSU_symposium/hallucination_2.png" alt="Table from Walters & Wilder: fabrication rates by citation type, 55% for GPT-3.5 and 18% for GPT-4 overall, both rising to 70% on book chapters." class="incident-evidence-image" />
+	<figcaption class="incident-evidence-caption"><a href="https://doi.org/10.1038/s41598-023-41032-5" target="_blank" rel="noopener noreferrer">Walters & Wilder, Scientific Reports, 2023</a></figcaption>
+</figure>
+
+<div class="incident-body">
+	<p>The improvement is real but uneven. Book chapters were fabricated at 70% in both models, and <strong>among the citations that did point to real work, 43% of GPT-3.5's and 24% of GPT-4's still carried substantive errors.</strong> The errors cluster in volume, issue, pages and year.</p> 
+	<p>However, literature got worse anyway. Fabricated references in PubMed Central held steady at roughly <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00603-3/fulltext" target="_blank" rel="noopener noreferrer">4 per 10,000 paper through all of 2023, began climbing in mid-2024, and reached roughly 57 per 10,000 by early 2026s</a> (fourteen times higher).</p>
+	<p></p>
+</div>
+
+<figure class="incident-evidence">
+	<img src="/AI_workshop_KSU_symposium/hallucination_3.png" alt="Line chart: fabricated references per 10,000 PubMed Central papers, flat around 4 through 2023, climbing to 57 by early 2026." class="incident-evidence-image" />
+	<figcaption class="incident-evidence-caption"><a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00603-3/fulltext" target="_blank" rel="noopener noreferrer">The Lancet, 2026</a></figcaption>
+</figure>
+
+<div class="incident-body">
+	<p>What the curve tracks is more people using it and fewer of them checking and a better model may not be what fixes that.</p>
+	<p>Unless it is actually retrieving from a database, <a href="https://www.nature.com/articles/d41586-026-00969-z" target="_blank" rel="noopener noreferrer">the model is not looking anything up</a>. It is producing text that fits the shape of the request. A reference is one of the most regular shapes in academic writing - authors, year, title, journal, volume, pages, DOI - and that regularity is exactly what a model reproduces well, with or without a real paper behind it. <strong>The result is often assembled from fragments of genuine publications</strong>, which researchers studying this call Frankenstein citations. DOIs get invented too, including DOIs attached to references that are otherwise real.</p>
+	<p></p>
+</div>
+
+<figure class="incident-evidence">
+	<img src="/AI_workshop_KSU_symposium/hallucination_4.png" alt="Nature diagram: an annotated fake citation with a real first author, real co-authors, a plausible title and DOI format, none of which point to an actual publication." class="incident-evidence-image incident-evidence-image--narrow" />
+	<figcaption class="incident-evidence-caption"><a href="https://www.nature.com/articles/d41586-026-00969-z" target="_blank" rel="noopener noreferrer">Nature, April 2026</a></figcaption>
+</figure>
+
+<div class="incident-body">
+	<p>Pattern completion is precisely why the output survives inspection. The example above illustrates this: a first author who really does publish on that topic, co-authors who really do publish with that first author, a plausible title built from words those authors use, a volume plausible for the year, page numbers plausible for the volume, and a DOI that begins exactly the way real DOIs from that journal begin.</p>
+	<p><strong>Every component is individually correct. Only the combination does not exist.</strong></p>
+	<p><a href="https://stanforddaily.com/2024/12/04/hancock-admitted-to-ai-use/" target="_blank" rel="noopener noreferrer">Jeff Hancock</a> is a Stanford communication professor whose <strong>research area is technology and misinformation</strong>. In November 2024 he filed an expert declaration in a Minnesota case about the state's ban on election deepfakes, on behalf of the state Attorney General. <strong>It contained two fabricated citations and an incorrect author list on a real study.</strong></p>
+	<p></p>
+</div>
+
+<blockquote class="closing-quote">
+		<p>A reference produced by a chatbot is a search query until it has been found in a real database.</p>
+</blockquote>
+
+<h2>What We Can Hand Over</h2>
+
+<div class="incident-body">
+	<p>So the question is not whether to use these tools, but which part of the job to give them. Finding papers is the part that scales well. We are still the ones who check that a paper is real, relevant and correctly cited.</p>
+</div>
+
+<figure class="incident-evidence">
+	<img src="/AI_workshop_KSU_symposium/search_flow.png" alt="Diagram: two routes, human search and AI-assisted search, converging on the same read, check and cite steps." class="privacy-image-full" />
+	<figcaption class="incident-evidence-caption">Both routes end in the same place. Only the first step is negotiable.</figcaption>
+</figure>
+
+<div class="incident-body">
+	<p>The tools that cover that first step come in two kinds, and they fail in different ways — which is why most people end up using both. We won't walk through them one by one here; the distinction below is the point, and the table is there for whoever wants to go further on their own time.</p>
+</div>
+
+<div class="institution-grid">
+	<div class="institution-cell privacy-table-card">
+		<img src="/AI_workshop_KSU_symposium/research_papers.png" alt="Icon for answer engines" class="institution-mark" />
+		<p class="incident-title">Answer engines</p>
+		<ul>
+			<li>You ask a question; they return papers with the relevant claims extracted</li>
+			<li>Good for starting from a question rather than from a paper</li>
+			<li>Limited by what is indexed, and by an LLM reading it for you</li>
+			<li>Extracted claims still need to be checked against the paper itself</li>
+		</ul>
+	</div>
+	<div class="institution-cell privacy-table-card">
+		<img src="/AI_workshop_KSU_symposium/research_graph.png" alt="Icon for citation-graph mappers" class="institution-mark" />
+		<p class="incident-title">Citation-graph mappers</p>
+		<ul>
+			<li>You give one paper; they map what it cites and what cites it</li>
+			<li>Built on citation links between real papers, so nothing is invented</li>
+			<li>Good for finding neighbours you did not know to search for</li>
+			<li>Never comprehensive, and the starting paper is your choice, not theirs</li>
+		</ul>
+	</div>
+</div>
+
+<div class="incident-body">
+	<p>The table below is take-home material.</p>
+</div>
+
+<div class="privacy-table-wrap">
+<table class="research-tools-table">
+	<colgroup>
+		<col style="width: 22ch" />
+		<col style="width: 16ch" />
+		<col style="width: 32ch" />
+		<col style="width: 32ch" />
+		<col style="width: 10ch" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			<th scope="col">Kind</th>
+			<th scope="col">Good at</th>
+			<th scope="col">Watch out for</th>
+			<th scope="col">Cost</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="https://www.semanticscholar.org" target="_blank" rel="noopener noreferrer">Semantic Scholar</a></td>
+			<td>Answer engine</td>
+			<td>Broad free search, and the database several of these tools are built on</td>
+			<td>Finds papers, does not synthesise them for you</td>
+			<td>Free</td>
+		</tr>
+		<tr>
+			<td><a href="https://elicit.com" target="_blank" rel="noopener noreferrer">Elicit</a></td>
+			<td>Answer engine</td>
+			<td>Extracting methods, sample sizes and outcomes into a comparable table</td>
+			<td>Coverage limited to indexed abstracts and open-access full text</td>
+			<td>Freemium</td>
+		</tr>
+		<tr>
+			<td><a href="https://consensus.app" target="_blank" rel="noopener noreferrer">Consensus</a></td>
+			<td>Answer engine</td>
+			<td>Quick read on whether the literature supports a claim</td>
+			<td>Counts papers without weighting study design or sample size</td>
+			<td>Freemium</td>
+		</tr>
+		<tr>
+			<td><a href="https://scispace.com" target="_blank" rel="noopener noreferrer">SciSpace</a></td>
+			<td>Answer engine</td>
+			<td>Explaining dense PDFs, equations and tables in plain language</td>
+			<td>Vendor-run benchmarks; weaker for systematic reviews</td>
+			<td>Freemium</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.researchrabbit.ai" target="_blank" rel="noopener noreferrer">Research Rabbit</a></td>
+			<td>Citation graph</td>
+			<td>Exploring outward from seed papers and author networks</td>
+			<td>Free tier limited since it moved to freemium in late 2025</td>
+			<td>Freemium</td>
+		</tr>
+		<tr>
+			<td><a href="https://www.connectedpapers.com" target="_blank" rel="noopener noreferrer">Connected Papers</a></td>
+			<td>Citation graph</td>
+			<td>The fastest single-paper neighbourhood map</td>
+			<td>Limited free graphs; not comprehensive</td>
+			<td>Freemium</td>
+		</tr>
+		<tr>
+			<td><a href="https://litmaps.com" target="_blank" rel="noopener noreferrer">Litmaps</a></td>
+			<td>Citation graph</td>
+			<td>Tracking how a topic evolves and alerting on new papers</td>
+			<td>Steeper to learn than Connected Papers</td>
+			<td>Freemium</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p class="incident-sources"><strong>Plans and free tiers change often; verify before relying on this.</strong></p>
+
+<div class="featured-source">
+	<h3>Gemini Notebook (Former <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/" target="_blank" rel="noopener noreferrer">NotebookLM</a>)</h3>
+	<div class="incident-body">
+		<p>The name changed on 16 July 2026 but it is same product.</p>
+		<p>This tool only reads what you give it. You upload your own sources (like PDFs, documents, links) and <strong>it answers from those sources only</strong>, pointing to the file and location each answer came from.</p>
+		<p><strong>That is what makes it different:</strong> It cannot fabricate a reference to a paper you did not give it.</p>
+		<p><a href="https://support.google.com/gemininotebook/answer/17670842" target="_blank" rel="noopener noreferrer">Free</a> with a Google account: <a href="https://support.google.com/gemininotebook/answer/16269187" target="_blank" rel="noopener noreferrer">50 sources per notebook, 50 chat questions a day, and 100 notebooks</a>.</p>
+		<p>Everything you upload goes to Google's servers under whatever terms your account carries.</p>
+	</div>
+</div>

@@ -1,0 +1,932 @@
+/*
+ * Paleta "Ocean & Ember"
+ * - Teal (#005f73 / #0a9396): cor primária — links, botões, item ativo da sidebar
+ * - Menta (#94d2bd): acento suave — hover de navegação, ícones de âncora
+ * - Âmbar (#ee9b00 / #ca6702): destaque secundário — fundo do card "About Me", eyebrows
+ * - Vermelho (#bb3e03 / #ae2012 / #9b2226): acento forte, uso moderado — asides de perigo
+ *   e hover do botão de call-to-action
+ * - #001219 / #e9d8a6: base do fundo/texto neutro (escuro e claro, respectivamente)
+ *
+ * Tipografia: Ubuntu (títulos, 700) / Quicksand (corpo) / Fira Code (código)
+ *
+ * Nenhuma regra aqui usa @layer, então ela sobrepõe os estilos padrão do Starlight
+ * (que vivem em @layer starlight.*) sem precisar de !important.
+ */
+
+/* Base font size: todo valor em rem no site (incl. os tokens --sl-text-*
+   do Starlight) escala a partir daqui — o navegador usaria 16px por padrão. */
+html {
+	font-size: 17px;
+}
+
+:root {
+	--sl-font: 'Quicksand', var(--sl-font-system);
+	--sl-font-mono: 'Fira Code', var(--sl-font-system-mono);
+
+	/* Vermelho forte usado com moderação: plugado no hue nativo do Starlight,
+	   então só aparece em asides do tipo "danger" — e no hover do CTA da home. */
+	--sl-hue-red: 358;
+	--sl-color-strong: hsl(358, 70%, 55%);
+
+	/* Âmbar (destaque secundário, não faz parte do sistema de cores do Starlight) */
+	--sl-color-highlight-low: hsl(30, 70%, 18%);
+	--sl-color-highlight: hsl(39, 100%, 50%);
+	--sl-color-highlight-high: hsl(39, 90%, 82%);
+
+	/* Fundo dedicado do hero da home — sempre no tom areia, nos dois modos */
+	--sl-color-hero-bg: hsl(45, 20%, 14%);
+
+	/* Coluna de conteúdo mais larga nas páginas com sidebar (padrão do
+	   Starlight é 45rem). A home usa hero sem sidebar e já tem seu próprio
+	   override para 67.5rem (mais específico), então não é afetada. */
+	--sl-content-width: 54rem;
+}
+
+/* Modo escuro (valores padrão em :root) */
+:root {
+	--sl-color-white: hsl(197, 20%, 97%);
+	--sl-color-gray-1: hsl(197, 10%, 92%);
+	--sl-color-gray-2: hsl(197, 6%, 75%);
+	--sl-color-gray-3: hsl(197, 6%, 55%);
+	--sl-color-gray-4: hsl(197, 7%, 36%);
+	--sl-color-gray-5: hsl(197, 9%, 22%);
+	--sl-color-gray-6: hsl(197, 12%, 15%);
+	--sl-color-black: hsl(197, 100%, 5%);
+
+	--sl-color-accent-low: hsl(190, 85%, 14%);
+	--sl-color-accent: hsl(181, 70%, 45%);
+	--sl-color-accent-high: hsl(175, 55%, 78%);
+
+	--sl-color-mint: hsl(160, 41%, 70%);
+
+	/* Título da seção "Thinking With AI" — versão clara para contraste no escuro */
+	--sl-color-home-title: hsl(190, 80%, 65%);
+}
+
+/* Modo claro */
+:root[data-theme='light'] {
+	--sl-color-white: hsl(45, 30%, 10%);
+	--sl-color-gray-1: hsl(45, 20%, 16%);
+	--sl-color-gray-2: hsl(45, 14%, 26%);
+	--sl-color-gray-3: hsl(45, 10%, 42%);
+	--sl-color-gray-4: hsl(45, 10%, 60%);
+	--sl-color-gray-5: hsl(45, 20%, 84%);
+	--sl-color-gray-6: hsl(45, 45%, 91%);
+	--sl-color-gray-7: hsl(45, 50%, 95%);
+	--sl-color-black: hsl(45, 55%, 97%);
+
+	/* Fundo da página — neutro frio. */
+	--sl-color-bg: #f7f9fa;
+
+	/* Header e sidebar um tom mais escuro que o fundo da página, para o
+	   conteúdo parecer "elevado" em relação à navegação — e a divisória
+	   entre eles em cinza-frio, não mais no tom areia padrão do Starlight.
+	   --sl-color-bg-nav, --sl-color-bg-sidebar e --sl-color-hairline-shade
+	   já são tokens independentes por tema no próprio Starlight (props.css),
+	   então sobrescrever aqui não afeta o modo escuro. */
+	--sl-color-bg-nav: #eef1f3;
+	--sl-color-bg-sidebar: #eef1f3;
+	--sl-color-hairline-shade: #dde3e7;
+
+	--sl-color-accent-low: hsl(184, 55%, 90%);
+	--sl-color-accent: hsl(190, 100%, 23%);
+	--sl-color-accent-high: hsl(190, 85%, 16%);
+
+	--sl-color-highlight-low: hsl(35, 85%, 90%);
+	--sl-color-highlight: hsl(30, 98%, 40%);
+	--sl-color-highlight-high: hsl(30, 85%, 25%);
+
+	--sl-color-mint: hsl(160, 50%, 32%);
+
+	--sl-color-hero-bg: hsl(45, 45%, 91%);
+
+	/* Título da seção "Thinking With AI" — hex literal pedido (#005f73) */
+	--sl-color-home-title: hsl(190, 100%, 23%);
+}
+
+/* Títulos em Ubuntu Bold — reforça o lado "elegante" com peso e personalidade */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Ubuntu', var(--sl-font-system);
+	font-weight: 700;
+}
+
+/* Toque divertido: links do conteúdo migram para menta no hover */
+.sl-markdown-content a:not(:where(.not-content *)) {
+	text-decoration-color: transparent;
+	text-underline-offset: 0.25em;
+	transition:
+		color 0.15s ease,
+		text-decoration-color 0.15s ease;
+}
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+	color: var(--sl-color-mint);
+	text-decoration-line: underline;
+	text-decoration-color: var(--sl-color-mint);
+}
+
+/* Ícones de âncora (#) nos títulos também acendem em menta no hover */
+.sl-anchor-link:hover,
+.sl-anchor-link:focus {
+	color: var(--sl-color-mint);
+}
+
+/* Cards de navegação anterior/próximo: leve elevação e borda menta no hover */
+.pagination-links a {
+	transition:
+		transform 0.15s ease,
+		border-color 0.15s ease,
+		box-shadow 0.15s ease;
+}
+.pagination-links a:hover {
+	border-color: var(--sl-color-mint);
+	transform: translateY(-2px);
+}
+
+/* ======================================================
+   HOME PAGE (index.mdx)
+   ====================================================== */
+
+/* Placeholder da ilustração no hero — some quando a imagem real entrar no lugar */
+.hero-illustration-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 31.25rem; /* ~500px */
+	aspect-ratio: 1 / 1;
+	margin-inline: auto;
+	border: 2px dashed var(--sl-color-accent);
+	border-radius: 0.75rem;
+	padding: 1.5rem;
+	text-align: center;
+	color: var(--sl-color-gray-3);
+	font-size: var(--sl-text-sm);
+}
+
+/* Imagem do hero: sem largura/altura fixas, mantém a proporção original do arquivo.
+   Cobre tanto <img> direto (hero.image.file) quanto o wrapper .hero-html com <img>
+   aninhado (hero.image.html) — usamos o segundo caminho para não passar pelo
+   pipeline de otimização do Astro, que cortaria a imagem em 400x400. */
+[data-has-hero] .hero > img,
+[data-has-hero] .hero > .hero-html,
+[data-has-hero] .hero > .hero-html img {
+	width: 100%;
+	max-width: 31.25rem; /* limite de largura — a altura passa a seguir a proporção real */
+	height: auto;
+	aspect-ratio: auto;
+	object-fit: contain;
+	display: block;
+}
+
+/* Faixa do hero: fundo sólido no tom areia, igual nos dois modos */
+[data-has-hero] .hero {
+	background: var(--sl-color-hero-bg);
+	border-radius: 1rem;
+	padding: 2.5rem 1.5rem 1.5rem;
+}
+
+/* Subtítulo do hero, dentro do mesmo <h1> — mais leve que o título principal */
+.hero-subtitle {
+	display: block;
+	margin-top: 0.5rem;
+	font-weight: 400;
+	font-size: clamp(var(--sl-text-base), calc(0.25rem + 2vw), var(--sl-text-xl));
+	color: var(--sl-color-gray-2);
+}
+
+.home-summary {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem; /* ritmo de leitura normal — substitui o espaçamento duplicado */
+	padding-block: 1.5rem;
+	text-align: left;
+}
+.home-summary > * {
+	margin: 0; /* remove o margin-top extra que o Starlight aplica por padrão entre blocos */
+}
+.home-summary h2 {
+	color: var(--sl-color-home-title);
+}
+/* Linha de apoio: fonte de título (Ubuntu), pill com fundo teal suave para se destacar do título e do corpo */
+.home-summary .home-subtitle {
+	align-self: flex-start; /* pill abraça o texto, não estica a largura toda */
+	margin-top: .5rem; /* aproxima do título, deixando ~0.35rem de respiro */
+	margin-bottom: -0.4rem; /* aproxima do corpo, deixando ~0.85rem de respiro (era 1.25rem) */
+	padding: 0.35rem 0.9rem;
+	border-radius: 999px;
+	background: rgba(10, 147, 150, 0.12);
+	font-size: var(--sl-text-2xl);
+	font-family: 'Ubuntu', var(--sl-font-system);
+	font-weight: 700;
+	color: #0a9396;
+}
+.home-summary .home-body {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem; /* mesmo ritmo entre parágrafos do corpo que já estava correto */
+}
+.home-summary .home-body p {
+	margin: 0;
+	font-size: var(--sl-text-lg);
+	color: var(--sl-color-gray-2);
+}
+
+.home-about {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem; /* espaço entre blocos — nitidamente maior que o ritmo de parágrafo (1.25rem) dentro de cada bloco */
+	padding: 2rem;
+	background: var(--sl-color-highlight-low);
+	border-radius: 1rem;
+	text-align: left;
+}
+/* Override escopado só para esta seção — não mexe no token --sl-color-highlight-low,
+   que continua disponível para outros usos futuros. */
+.home-about {
+	background: #deede7;
+}
+.home-about > * {
+	margin: 0; /* zera o margin-top que o Starlight aplica por padrão, evita somar com o gap */
+}
+/* Título "About Me": mesma tipografia/tamanho do h2 "Thinking With AI" (herdado),
+   só a cor muda para o laranja/terracota de destaque desta seção. */
+.home-about h2 {
+	color: var(--sl-color-highlight);
+}
+.home-about p {
+	color: var(--sl-color-gray-1);
+}
+
+/* Blocos com imagem do "About Me" (IMG 1 e IMG 2): imagem em cima, texto
+   embaixo — mesmo padrão para os dois, imagem e texto lidos como um par. */
+.home-bio-stack {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.25rem; /* imagem e texto do mesmo bloco ficam próximos, ~metade do gap entre blocos */
+}
+.home-bio-image {
+	display: block;
+	margin-inline: auto;
+	width: 100%;
+	/* 816px = largura natural de time_line_profi.png, a menor das duas imagens —
+	   garante que nenhuma das duas seja ampliada além do próprio pixel natural,
+	   e como o valor é o mesmo para as duas, elas leem como um par combinando. */
+	max-width: min(996px, 100%);
+	height: auto;
+}
+
+/* Blocos de texto do "About Me" (TEXT 1, 2 e 3): mesma largura de leitura,
+   independente de estarem sozinhos ou abaixo de uma imagem. */
+.home-ai-block {
+	max-width: 68ch;
+	margin-inline: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem; /* ritmo de parágrafo dentro do bloco */
+}
+
+/* Nota institucional discreta — sem caixa, só uma linha fina separando do About Me */
+.home-context {
+	padding-top: 1.25rem;
+	margin-top: 1.5rem;
+	border-top: 1px solid var(--sl-color-hairline);
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+
+/* Botão de call-to-action, fora da caixa do About Me */
+.home-cta {
+	margin-top: 1.5rem;
+}
+.home-cta .sl-link-button.primary:hover {
+	background: var(--sl-color-strong);
+	border-color: var(--sl-color-strong);
+}
+
+/* ======================================================
+   INCIDENT CARDS (Real-World Incidents and future pages)
+   Reusable template: header (icon+title), narrative body,
+   evidence figure, pull-quote, sources. All colors/fonts/
+   spacing pulled from existing tokens, same border+bg
+   pattern Starlight's own <Card> uses.
+   ====================================================== */
+.incident-card {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	border: 1px solid var(--sl-color-gray-5);
+	background-color: var(--sl-color-black);
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+}
+
+.incident-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.incident-icon {
+	width: 150px;
+	height: auto;
+	flex-shrink: 0;
+}
+.incident-heading {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.incident-title {
+	margin: 0;
+	font-family: 'Ubuntu', var(--sl-font-system);
+	font-weight: 700;
+	font-size: var(--sl-text-xl);
+	color: var(--sl-color-white);
+}
+.incident-title a {
+	color: inherit;
+}
+.incident-subtitle {
+	margin: 0;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+@media (max-width: 768px) {
+	.incident-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.incident-body {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	max-width: 75ch;
+	margin-inline: auto;
+}
+.incident-body p {
+	margin: 0;
+}
+.incident-body ul {
+	margin: 0;
+}
+
+.incident-evidence {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+.incident-evidence-image {
+	display: block;
+	max-width: 80%;
+	height: auto;
+	margin-inline: auto;
+}
+/* Scoped to two oversized figures on the research-tools page (hallucination_1
+   and hallucination_4) — 56% is the 80% base reduced by 30%. */
+.incident-evidence-image--narrow {
+	max-width: 56%;
+}
+.incident-evidence-caption {
+	max-width: 75ch;
+	margin-inline: auto;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+	text-align: center;
+}
+
+.incident-quote {
+	max-width: 75ch;
+	margin-inline: auto;
+	margin-block: 0;
+	padding: 0.75rem 1.5rem;
+	border-left: 4px solid var(--sl-color-accent);
+	font-size: var(--sl-text-xl);
+	font-style: italic;
+	color: var(--sl-color-white);
+}
+
+.incident-sources {
+	margin: 0;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+.incident-sources a {
+	color: inherit;
+}
+
+/* Modo claro apenas: cartão sobe da página com sombra em vez do fundo
+   idêntico ao body + borda de 1px. O tom escuro do modo escuro continua
+   igual (background-color: var(--sl-color-black) acima, com borda). */
+:root[data-theme='light'] .incident-card {
+	background-color: #ffffff;
+	border: none;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Acento teal só na borda da pull-quote, modo claro. O texto continua na
+   cor de corpo padrão (--sl-color-white, escura no modo claro): #0a9396
+   sobre branco só chega a ~3.7:1 de contraste, abaixo do mínimo AA (4.5:1)
+   para texto deste tamanho — então o teal fica só no detalhe da borda. */
+:root[data-theme='light'] .incident-quote {
+	border-left-color: #0a9396;
+}
+
+/* Caixa de busca no header, modo claro: sem isso ela herdaria
+   var(--sl-color-black), um token muito compartilhado (inclusive pelo
+   texto do item ativo da sidebar) para mexer só por causa da busca —
+   então o fundo é sobrescrito direto aqui, deixando o token intocado.
+   Mesmo breakpoint do Starlight (50rem): no mobile o botão é só um ícone
+   transparente, e isso continua igual. */
+@media (min-width: 50rem) {
+	:root[data-theme='light'] button[data-open-modal] {
+		background-color: #ffffff;
+	}
+}
+
+/* ======================================================
+   FECHAMENTO da página Real-World Incidents: conclusão em
+   prosa comum (sem .incident-card, sem borda nem sombra),
+   para não ser confundida com um sétimo card. Só a régua
+   fina no topo (mesmo --sl-color-gray-5 da borda dos cards)
+   sinaliza "nova seção", e a pull-quote reaproveita o mesmo
+   acento teal de .incident-quote, sem caixa ao redor.
+   ====================================================== */
+.incidents-closing {
+	margin-top: 1rem;
+	padding-top: 2rem;
+	border-top: 1px solid var(--sl-color-gray-5);
+}
+
+.closing-quote {
+	max-width: 75ch;
+	margin-block: 1.5rem;
+	margin-inline: auto;
+	padding-left: 1.5rem;
+	border-left: 4px solid var(--sl-color-accent);
+	text-align: center;
+}
+.closing-quote p {
+	margin: 0;
+	font-size: var(--sl-text-xl);
+	font-style: italic;
+	color: var(--sl-color-white);
+}
+.closing-quote-attribution {
+	margin-top: 0.5rem;
+	font-size: var(--sl-text-sm);
+	font-style: normal;
+	color: var(--sl-color-gray-3);
+}
+:root[data-theme='light'] .closing-quote {
+	border-left-color: #0a9396;
+}
+
+.closing-line {
+	margin-top: 1.5rem;
+	font-style: italic;
+	color: var(--sl-color-gray-2);
+}
+
+/* ======================================================
+   PRIVACY & SECURITY — página de referência, não usa
+   .incident-card. Reaproveita .incident-body (pilha de
+   parágrafos, 75ch), .incident-quote e .incident-sources
+   como estão; só o link em destaque e as duas colunas são
+   padrões novos, porque nada existente cobria essa forma.
+   ====================================================== */
+
+/* Bloco 1: link em destaque, com presença própria — acento
+   teal igual ao resto do site, mesmo tom de fundo suave já
+   usado no pill de .home-summary .home-subtitle. */
+.featured-source {
+	display: block;
+	padding: 1.5rem;
+	border: 2px solid var(--sl-color-accent);
+	border-radius: 0.5rem;
+	background: rgba(10, 147, 150, 0.12);
+}
+.featured-source-heading {
+	display: block;
+	font-family: 'Ubuntu', var(--sl-font-system);
+	font-weight: 700;
+	font-size: var(--sl-text-xl);
+	color: var(--sl-color-accent);
+	text-decoration: none;
+}
+.featured-source-heading:hover {
+	text-decoration: underline;
+}
+.featured-source-line {
+	margin-top: 0.5rem;
+	color: var(--sl-color-gray-1);
+}
+
+/* Imagens de largura total da coluna de conteúdo — diferente
+   de .incident-evidence-image, que trava em 80% (essa aqui
+   precisa ocupar 100%, conforme pedido). */
+.privacy-image-full {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Bloco 3: duas colunas, imagem ~1/3 e texto ~2/3. Não existe
+   mais um padrão equivalente no projeto (o antigo .home-bio-row
+   foi removido num refactor anterior), então esta é uma regra
+   genuinamente nova. */
+.privacy-columns {
+	display: flex;
+	align-items: flex-start;
+	gap: 2rem;
+}
+.privacy-columns-image {
+	flex: 0 1 33%;
+	width: 20%;
+	height: auto;
+	display: block;
+}
+.privacy-columns-text {
+	flex: 1 1 66%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.privacy-assumptions {
+	text-align: center;
+	font-style: italic;
+	margin-block: 1.5rem;
+}
+.privacy-assumptions p {
+	margin-block: 0.15rem;
+}
+@media (max-width: 768px) {
+	.privacy-columns {
+		flex-direction: column;
+	}
+}
+
+/* Tabela comparativa de treinamento de dados: tabela normal a partir de
+   768px (herda o estilo padrão de tabela do Starlight — bordas e
+   cabeçalho em negrito já usam os mesmos tokens de cor do resto do
+   site), vira cards empilhados por ferramenta abaixo disso. As duas
+   marcações existem em paralelo no HTML; a media query decide qual
+   aparece — sem depender de JS. */
+/* Wrapper com rolagem horizontal sempre ativa (overflow-x:auto, não só
+   quando necessário) + o clássico truque de "scroll shadows" em CSS puro:
+   dois gradientes com background-attachment:local cobrem a sombra perto
+   das bordas do conteúdo (por isso ela some no início/fim do scroll), e
+   dois radial-gradient com attachment:scroll ficam fixos nas bordas do
+   wrapper, dando o efeito visual de sombra/fade. Sem JS. */
+.privacy-table-wrap {
+	overflow-x: auto;
+	background:
+		linear-gradient(to right, var(--sl-color-bg) 30%, transparent),
+		linear-gradient(to left, var(--sl-color-bg) 30%, transparent) 100% 0,
+		radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.25), transparent),
+		radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.25), transparent) 100% 0;
+	background-repeat: no-repeat;
+	background-color: var(--sl-color-bg);
+	background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+	background-attachment: local, local, scroll, scroll;
+}
+
+/* Starlight define table{display:block;overflow:auto} — a rolagem já é
+   do wrapper acima, então isso volta ao table-layout nativo, que
+   table-layout:fixed e a coluna sticky abaixo precisam para funcionar.
+   width trava a largura total na soma exata do colgroup (24ch + 4×28ch),
+   então a tabela nunca encolhe para caber no espaço disponível. */
+.privacy-table {
+	display: table;
+	table-layout: fixed;
+	width: 136ch;
+	border-collapse: collapse;
+}
+.privacy-table th:first-child {
+	position: sticky;
+	left: 0;
+	z-index: 1;
+	background-color: var(--sl-color-bg);
+}
+
+.privacy-table th[scope='row'] {
+	color: var(--sl-color-white);
+	font-weight: 600;
+	text-align: start;
+}
+
+/* Faixa do cabeçalho: fundo sólido cobrindo as 5 células (não só a
+   sticky), mais respiro vertical que o corpo, para ler como uma faixa
+   separada — e para a coluna sticky não deixar o conteúdo aparecer por
+   baixo dela ao rolar. Nomes das ferramentas centralizados; a célula
+   vazia do canto e os rótulos de linha continuam à esquerda. */
+.privacy-table thead th {
+	background-color: var(--sl-color-bg);
+	padding-block: 1rem;
+}
+.privacy-table thead th:not(:first-child) {
+	text-align: center;
+}
+
+.privacy-table-mobile {
+	display: none;
+}
+@media (max-width: 768px) {
+	.privacy-table {
+		display: none;
+	}
+	.privacy-table-mobile {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+}
+
+.privacy-table-card {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+}
+.privacy-table-card h3 {
+	margin: 0 0 1rem;
+	font-size: 8px;
+}
+.privacy-table-card dl {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.privacy-table-card dt {
+	margin-top: 0.5rem;
+	font-weight: 600;
+	color: var(--sl-color-white);
+}
+.privacy-table-card dt:first-child {
+	margin-top: 0;
+}
+.privacy-table-card dd {
+	margin: 0;
+}
+
+/* Quiz de V/F antes da tabela: mesmo padrão de card já usado em
+   .privacy-table-card (borda cinza, cantos de 0.5rem), lido como seção
+   própria porque fica entre um <h2> e uma lead sentence, igual ao início
+   da seção da tabela logo abaixo. O painel de resposta já vem visível no
+   HTML (funciona sem JS) — o script só esconde no load e revela por
+   pergunta ao clicar em qualquer um dos botões daquele item. */
+.privacy-quiz {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+}
+.privacy-quiz-item {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+/* Divisória fina entre perguntas — não depois da última. A pergunta em si
+   não é mais um card próprio, só esse traço no rodapé de cada uma exceto
+   a última separa uma da outra. */
+.privacy-quiz-item:not(:last-child) {
+	padding-bottom: 0.75rem;
+	border-bottom: 1px solid var(--sl-color-gray-5);
+}
+.privacy-quiz-statement {
+	margin: 0;
+	font-weight: 600;
+	color: var(--sl-color-white);
+}
+.privacy-quiz-buttons {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+.privacy-quiz-btn {
+	box-sizing: border-box;
+	width: 120px;
+	height: 48px;
+	padding: 0;
+	border: 2px solid var(--sl-color-accent);
+	border-radius: 0.375rem;
+	background: transparent;
+	color: var(--sl-color-accent);
+	font-family: inherit;
+	font-size: var(--sl-text-base);
+	font-weight: 600;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: top;
+	cursor: pointer;
+	transition:
+		background-color 0.15s ease,
+		color 0.15s ease;
+}
+.privacy-quiz-btn:hover {
+	/* Só background-color e color mudam aqui — nada de border-width,
+	   padding, width, height ou font-weight, senão a caixa muda de
+	   tamanho entre os estados. */
+	background-color: var(--sl-color-accent);
+	/* --sl-color-black inverte certo nos dois temas: claro no escuro,
+	   escuro no claro — mesmo truque usado no texto do item ativo da
+	   sidebar (--sl-color-text-invert também aponta pra esse token). */
+	color: var(--sl-color-black);
+}
+.privacy-quiz-btn:focus-visible {
+	outline: 2px solid var(--sl-color-accent);
+	outline-offset: 2px;
+}
+.privacy-quiz-answer {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	border-left: 4px solid var(--sl-color-accent);
+	padding-left: 1rem;
+}
+/* Sem isso, o display:flex acima (regra de autor) vence o display:none
+   do atributo hidden (regra do user-agent) — origem sempre bate
+   especificidade na cascata, então o atributo hidden nunca escondia
+   nada. !important aqui é local a este seletor só, não vaza pro resto
+   da página. */
+.privacy-quiz-answer[hidden] {
+	display: none !important;
+}
+.privacy-quiz-answer-label {
+	margin: 0;
+	font-size: var(--sl-text-sm);
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	color: var(--sl-color-accent);
+}
+.privacy-quiz-answer-text {
+	margin: 0;
+	color: var(--sl-color-gray-1);
+}
+:root[data-theme='light'] .privacy-quiz-answer {
+	border-left-color: #0a9396;
+}
+:root[data-theme='light'] .privacy-quiz-answer-label {
+	color: #0a9396;
+}
+
+/* Aside informativo neutro — mesmo acento teal de borda esquerda que
+   .incident-quote/.closing-quote/.privacy-quiz-answer já usam, mas nenhum
+   dos três serve aqui: são estilizados como citação (itálico, fonte maior)
+   ou são especificamente o painel de resposta do quiz. Este é só um
+   destaque "preste atenção nisso" em texto de corpo normal. */
+.privacy-aside {
+	max-width: 75ch;
+	margin-inline: auto;
+	padding-left: 1rem;
+	border-left: 4px solid var(--sl-color-accent);
+}
+.privacy-aside p {
+	margin: 0;
+}
+:root[data-theme='light'] .privacy-aside {
+	border-left-color: #0a9396;
+}
+
+/* three_controls.png tem muito espaço em branco embutido no arquivo — só
+   a metade esquerda/superior tem os três ícones. Em vez de encolher o
+   arquivo inteiro (o que deixaria os ícones minúsculos dentro de uma
+   coluna estreita), essa classe recorta só a região com conteúdo. Vai
+   junto com .privacy-columns-image no mesmo <img>, sem mexer nela —
+   nenhuma propriedade se repete entre as duas. */
+.privacy-controls-image {
+	aspect-ratio: 1;
+	object-fit: cover;
+	object-position: left top;
+	max-width: 150px;
+}
+
+/* Os três itens da moldura de abertura: rótulo com peso visual (mesmo
+   negrito/branco de .incident-title e .privacy-quiz-statement),
+   consequência em cor de corpo normal — <dt>/<dd> como elementos
+   separados, não texto corrido, porque são afirmações que sustentam o
+   resto da seção, não prosa. Não é .privacy-assumptions: aquela é
+   centralizada e itálica, e significa o oposto (suposições que dão errado). */
+.privacy-authorities {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.privacy-authorities dt {
+	font-weight: 700;
+	color: var(--sl-color-white);
+}
+.privacy-authorities dd {
+	margin: 0;
+	color: var(--sl-color-gray-1);
+}
+
+/* Ajustes escopados só na linha de abertura da seção "Am I allowed to
+   use this at all?" — nada aqui toca .privacy-columns/.privacy-columns-
+   image/.privacy-columns-text, que continuam servindo o bloco do balanço
+   mais acima sem alteração. */
+
+/* A lead-in herda max-width:75ch de .incident-body, mas sem o
+   margin-inline:auto que a centraliza — aqui ela fica alinhada à mesma
+   margem esquerda do <h2> logo acima. */
+.privacy-controls-lead {
+	margin-inline: 0;
+}
+
+/* Centraliza a coluna de texto verticalmente contra a imagem, em vez de
+   ficar colada no topo (o que sobrava vazio embaixo, à direita). Só a
+   partir de 769px: no empilhado (≤768px) .privacy-columns já vira coluna
+   única pela sua própria media query, e align-items nesse modo passaria
+   a centralizar horizontalmente — não é o que queremos no mobile, então
+   fica de fora dali; o empilhado continua exatamente como antes. */
+@media (min-width: 769px) {
+	.privacy-controls-row {
+		align-items: center;
+	}
+}
+
+/* Bloco "Institution": grade 2x2 dos exemplos externos — nenhuma classe
+   existente cobre uma grade de 4 células (privacy-columns é sempre 2
+   colunas fixas de imagem+texto), então é nova. max-width/margin-inline
+   seguem o mesmo padrão de leitura de .incident-body. */
+.institution-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem;
+	max-width: 75ch;
+	margin-inline: auto;
+}
+@media (max-width: 768px) {
+	.institution-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Layout interno de cada célula: imagem+nome centralizados, lista
+   alinhada à esquerda embaixo — nada existente empilha imagem+título+
+   lista desse jeito (privacy-table-card usa <dl>, não <ul>). */
+.institution-cell {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+	text-align: center;
+}
+.institution-cell ul {
+	margin: 0;
+	align-self: stretch;
+	text-align: left;
+	padding-inline-start: 1.25rem;
+}
+
+/* Brasão da universidade: os quatro arquivos já são círculos prontos
+   (1500x1500, anel + fundo embutidos na própria arte) — só largura fixa,
+   sem moldura/crop, para as quatro células alinharem no mesmo tamanho. */
+.institution-mark {
+	width: 96px;
+	height: auto;
+}
+
+/* Indentação da sub-lista da "August 2025 guidance": o reset do Starlight
+   zera margin em <ul>/<li>, mas não mexe em padding-inline-start — sem
+   isso a lista aninhada soma seu próprio recuo padrão do navegador ao da
+   lista externa (~80px no total). Só afeta <ul> aninhado dentro de <li>
+   em .incident-body, então não toca nenhuma lista de nível único da
+   página. */
+.incident-body li > ul {
+	padding-inline-start: 1.25rem;
+}
+
+/* Research Tools table (before-you-prompt/research-tools.mdx): sticky first
+   column like .privacy-table, but its own class so widening Tool here can
+   never touch the privacy page. Same fixed-layout pattern as .privacy-table:
+   every column gets an explicit ch width via colgroup (22+16+32+32+10 = 112ch)
+   and the table's own width is set to that exact sum, so no column borrows
+   space from another and the table overflows its container instead of
+   shrinking to fit — .privacy-table-wrap (reused unmodified) turns that
+   overflow into horizontal scroll. */
+.research-tools-table {
+	table-layout: fixed;
+	width: 112ch;
+	border-collapse: collapse;
+}
+.research-tools-table th:first-child,
+.research-tools-table td:first-child {
+	position: sticky;
+	left: 0;
+	z-index: 1;
+	background-color: var(--sl-color-bg);
+}

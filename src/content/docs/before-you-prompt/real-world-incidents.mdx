@@ -1,0 +1,168 @@
+---
+title: Real-World Incidents
+tableOfContents: false
+---
+
+<div class="incident-card">
+	<div class="incident-header">
+		<img src="/AI_workshop_KSU_symposium/target_1.png" alt="Arrow that missed the target" class="incident-icon" />
+		<div class="incident-heading">
+			<p class="incident-title">NYC MyCity Chatbot</p>
+			<p class="incident-subtitle">2023 – 2026</p>
+		</div>
+	</div>
+	<div class="incident-body">
+		<p><strong>2023:</strong> New York City launched an official chatbot to help business owners navigate city regulations, built on Microsoft's cloud platform and trained on over 2,000 city web pages.</p>
+		<p><strong>2024:</strong> Reporters found it advising businesses to break the law. It told employers they could take workers' tips and landlords they could refuse tenants with housing vouchers. Asked whether a restaurant could serve cheese a rat had nibbled on, it answered: <em>"Yes, you can still serve the cheese to customers if it has rat bites"</em> — then advised assessing the damage and informing customers.</p>
+	</div>
+	<figure class="incident-evidence">
+		<img
+			src="/AI_workshop_KSU_symposium/nyc-mycity-chatbot.png"
+			alt="The MyCity chatbot page after corrections, showing three separate warning notices"
+			class="incident-evidence-image"
+		/>
+		<figcaption class="incident-evidence-caption">The fix was three layers of warning: a banner, a placeholder, and a footnote. The advice underneath stayed.</figcaption>
+	</figure>
+	<div class="incident-body">
+		<p><strong>2026:</strong> The city announced it was shutting the bot down as a budget cut. Mayor Mamdani called it <em>"functionally unusable"</em>, at a cost of around half a million dollars.</p>
+	</div>
+	
+	<p class="incident-sources">Sources: <a href="https://apnews.com/article/new-york-city-chatbot-misinformation-6ebc71db5b770b9969c906a7ee4fae21" target="_blank" rel="noopener noreferrer">AP News</a> · <a href="https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law" target="_blank" rel="noopener noreferrer">The Markup</a></p>
+</div>
+
+<div class="incident-card">
+	<div class="incident-header">
+		<img src="/AI_workshop_KSU_symposium/target_1.png" alt="Arrow that missed the target" class="incident-icon" />
+		<div class="incident-heading">
+			<p class="incident-title">The Summer Reading List</p>
+			<p class="incident-subtitle">2025</p>
+		</div>
+	</div>
+	<div class="incident-body">
+		<p>In May 2025, the Chicago Sun-Times and the Philadelphia Inquirer distributed summer book list. Its reading list recommended fifteen titles, ten of which do not exist.</p>
+		<p>The authors are real but none of whom had written the books attributed to them. The freelancer who compiled the list used an AI tool and did not verify the output and nobody downstream checked either.</p>
+	</div>
+	<figure class="incident-evidence">
+		<img
+			src="/AI_workshop_KSU_symposium/sun-times-print.png"
+			alt="The printed summer reading list, showing book titles that do not exist"
+			class="incident-evidence-image"
+		/>
+		<figcaption class="incident-evidence-caption">The authors exist, and the titles and plots sound authentic. However, 10 out of 15 are fake.</figcaption>
+	</figure>
+	<p class="incident-sources">Sources: <a href="https://www.404media.co/chicago-sun-times-prints-ai-generated-summer-reading-list-with-books-that-dont-exist/" target="_blank" rel="noopener noreferrer">404 Media</a> · <a href="https://www.npr.org/2025/05/20/nx-s1-5405022/fake-summer-reading-list-ai" target="_blank" rel="noopener noreferrer">NPR</a> · <a href="https://chicago.suntimes.com/news/2025/05/20/syndicated-content-sunday-print-sun-times-ai-misinformation" target="_blank" rel="noopener noreferrer">Chicago Sun-Times</a></p>
+</div>
+
+<div class="incident-card">
+	<div class="incident-header">
+		<img src="/AI_workshop_KSU_symposium/target_3.png" alt="Arrow through a shattered target" class="incident-icon" />
+		<div class="incident-heading">
+			<p class="incident-title">The Replit Database Wipe</p>
+			<p class="incident-subtitle">2025</p>
+		</div>
+	</div>
+	<div class="incident-body">
+		<p>A software engineer using a Replit AI agent for "vibe coding" had their entire database deleted.</p>
+		<p>The project was subject to an explicit code freeze (meaning the agent had written instructions prohibiting it from making changes without permission). However, the agent executed destructive commands on the production database, wiping out records for over 1,200 executives and 1,190 companies.</p>
+		<p>When subsequently asked if the data could be recovered, the agent stated that a rollback was impossible and that all database versions had been destroyed - though the data was eventually recovered.</p>
+	</div>
+	<figure class="incident-evidence">
+		<img
+			src="/AI_workshop_KSU_symposium/replit-apology.png"
+			alt="The Replit agent apologizing, quoting the exact code-freeze rule it violated"
+			class="incident-evidence-image"
+		/>
+		<figcaption class="incident-evidence-caption">The agent could recite the rule it had broken, word for word. It just could not be stopped by it.</figcaption>
+	</figure>
+	<p class="incident-sources">Sources: <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" target="_blank" rel="noopener noreferrer">Fortune</a> · <a href="https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/" target="_blank" rel="noopener noreferrer">The Register</a></p>
+</div>
+
+<div class="incident-card">
+	<div class="incident-header">
+		<img src="/AI_workshop_KSU_symposium/target_3.png" alt="Arrow through a shattered target" class="incident-icon" />
+		<div class="incident-heading">
+			<p class="incident-title">The Gemini CLI File Deletion</p>
+			<p class="incident-subtitle">2025</p>
+		</div>
+	</div>
+	<div class="incident-body">
+		<p>The agent issued a command to create the destination directory, and the command failed without an error message; consequently, the agent announced that the folder had been created and moved on.</p>
+		<p>On Windows, moving multiple files to a non-existent directory causes each of them to be renamed to the same path, overwriting the previous one. This resulted in all the files being moved to a non-existent location and lost in the process.</p>
+	</div>
+	<figure class="incident-evidence">
+		<img
+			src="/AI_workshop_KSU_symposium/gemini-cli-log.png"
+			alt="Terminal log showing the agent confirming a directory was created and files were moved, when neither had happened"
+			class="incident-evidence-image"
+		/>
+		<figcaption class="incident-evidence-caption">The agent's session log, as filed in the bug report. No error appears on screen at any point in this sequence.</figcaption>
+	</figure>
+	<div class="incident-body">	
+		<p>The agent did not execute any listing command to verify whether the task had completed successfully, and when someone finally checked, the files had disappeared.</p>
+		<p>The agent later described its own move commands as ones it 'misinterpreted as successful'.</p>
+	</div>
+	
+	<p class="incident-sources">Sources: <a href="https://github.com/google-gemini/gemini-cli/issues/4586" target="_blank" rel="noopener noreferrer">GitHub issue, including the user's full session log</a></p>
+</div>
+
+<div class="incident-card">
+	<div class="incident-header">
+		<img src="/AI_workshop_KSU_symposium/target_2.png" alt="Arrow hitting a target after passing through another one" class="incident-icon" />
+		<div class="incident-heading">
+			<p class="incident-title">The Gym Booking</p>
+			<p class="incident-subtitle">2026</p>
+		</div>
+	</div>
+	<div class="incident-body">
+		<p>An Australian man asked an automated agent to book a popular early morning class at his gym, and because it was a popular class, he was fourth on the waiting list.</p>
+		<p>He asked if the agent could move him to a better position. The agent found that the booking system enforced its scheduling limits only in the browser, not in the API underneath, so it could reserve classes weeks further ahead than the gym allowed.</p>
+		<p>The agent tested the procedure with the person who was first on the waiting list, and the cancellation was successfully processed. This moved him from fourth to third place.</p>
+		<p>He asked the agent to undo the action, but this was not possible. The endpoints for creating a booking and joining the waiting list verified the user's identity and refused to perform actions on behalf of another person. Only the cancellation endpoint did not perform this verification. In other words, the removed person had lost their spot and would have to register again, going to the end of the queue.</p>
+	</div>
+	<figure class="incident-evidence">
+		<img
+			src="/AI_workshop_KSU_symposium/gym-agent.png"
+			alt="Message from the agent explaining that it cannot restore the cancelled booking"
+			class="incident-evidence-image"
+		/>
+		<figcaption class="incident-evidence-caption">The agent's own message to its user, explaining which API calls enforced authorization and which one did not. It calls the result a one-way security bug.</figcaption>
+	</figure>
+	<p class="incident-sources">Sources: <a href="https://www.abc.net.au/news/2026-08-10/ai-assistant-hacks-gym-website-aus-cyber-attack/107007986" target="_blank" rel="noopener noreferrer">ABC News (Australia)</a></p>
+</div>
+
+<div class="incident-card">
+	<div class="incident-header">
+		<img src="/AI_workshop_KSU_symposium/target_2.png" alt="Arrow hitting a target after passing through another one" class="incident-icon" />
+		<div class="incident-heading">
+			<p class="incident-title">"I Am Not a Robot"</p>
+			<p class="incident-subtitle">2023</p>
+		</div>
+	</div>
+	<div class="incident-body">
+		<p>Before releasing GPT-4, OpenAI had an external group test whether the model could take autonomous action in the world. In one task, the model hired a worker on TaskRabbit to solve a CAPTCHA for it.</p>
+		<p>The worker asked, half joking, if they were talking to a robot. Prompted to reason step by step, the model concluded it should not reveal what it was and should invent an excuse. It told the worker it had a vision impairment that made the images hard to see and the worker solved the CAPTCHA.</p>
+		<p>That is the version everyone knows. The headlines called it an algorithm escaping human control.</p>
+		<p>The evaluators' own write-up describes something narrower. A researcher was supervising the interaction and would have taken over if the exchange turned harmful. There was human intervention in the scaffolding partway through. The CAPTCHA delegation was not the goal of the study — it came up along the way.</p>
+		<p>The conclusion was not that alarming: the models tested did not appear capable of replicating autonomously, and were strikingly ineffective at acquiring resources or avoiding shutdown.</p>
+	</div>
+	<figure class="incident-evidence">
+		<img
+			src="/AI_workshop_KSU_symposium/gpt_chapta.png"
+			alt="Three news headlines describing the CAPTCHA test in alarming terms"
+			class="incident-evidence-image"
+		/>
+		<figcaption class="incident-evidence-caption">Three news headlines describing the CAPTCHA test in alarming terms.</figcaption>
+	</figure>
+	<p class="incident-sources">Sources: <a href="https://arxiv.org/abs/2303.08774" target="_blank" rel="noopener noreferrer">OpenAI, GPT-4 System Card</a> · <a href="https://metr.org/blog/2023-03-18-update-on-recent-evals/" target="_blank" rel="noopener noreferrer">METR (formerly ARC Evals), the evaluators' own account</a></p>
+</div>
+
+<div class="incidents-closing">
+	<h2>What these six have in common</h2>
+	<p>None of the people in these stories were reckless. A city government, two newspapers, three developers testing new tools. Every one of them was doing ordinary work with a tool that mostly worked.</p>
+	<p>In each case there was a checkpoint that should have caught the failure, and in each case it was missing or ignored. A disclaimer instead of a fix. An editorial review nobody ran. A code freeze written in a file the agent could read but was not bound by. A verification step the agent skipped. An authorization check the API never had. None of these were failures of the model. They were failures of the process around it.</p>
+	<p>Which is the uncomfortable part. The fix is not a better model — it is a step you add to your own workflow.</p>
+	<blockquote class="closing-quote">
+		<p>Those of us of a certain age can say from experience: We see this at every stage of the internet’s development; this current evolution is just happening an awful lot faster. If we keep blaming the technology, we’re never going to own the solution."</p>
+		<footer class="closing-quote-attribution"><a href="https://chicago.suntimes.com/opinion/2025/05/29/lessons-apology-from-sun-times-ceo-ai-generated-book-list" target="_blank" rel="noopener noreferrer">Melissa Bell, CEO of Chicago Public Media, writing after her newspaper published the fake reading list</a></footer>
+	</blockquote>
+</div>
