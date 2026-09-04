@@ -309,6 +309,20 @@ h6 {
 	border-color: var(--sl-color-strong);
 }
 
+/* O fundo desta seção é fixo nos dois modos (#deede7, ver regra acima),
+   mas os tokens de texto usados aqui (h2 e p) invertem entre claro/escuro
+   — no modo escuro isso deixava o texto quase branco sobre um fundo claro,
+   ilegível. Por isso os tokens são fixados aqui só para dentro de
+   .home-about, com os mesmos valores do bloco :root[data-theme='light'];
+   os tokens globais continuam intocados e livres para inverter
+   normalmente em qualquer outro lugar do site. */
+.home-about {
+	--sl-color-white: hsl(45, 30%, 10%);
+	--sl-color-gray-1: hsl(45, 20%, 16%);
+	--sl-color-gray-2: hsl(45, 14%, 26%);
+	--sl-color-highlight: hsl(30, 98%, 40%);
+}
+
 /* ======================================================
    INCIDENT CARDS (Real-World Incidents and future pages)
    Reusable template: header (icon+title), narrative body,
