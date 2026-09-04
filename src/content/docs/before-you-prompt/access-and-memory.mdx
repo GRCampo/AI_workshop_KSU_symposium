@@ -1,0 +1,188 @@
+---
+title: Access & Memory
+tableOfContents: false
+---
+
+<h2>Connecting the model to your files</h2>
+
+<div class="incident-body">
+	<p>A connector gives the model a door into a service where you already have an account, for example a driver or a email. It walks through that door as you and it uses your credentials, so <strong>it can acess whatever your account contain.</strong></p>
+	<p>Since it receives your permissions, if your account can open a file, the model can open it too, whether or not you were thinking about that file when you connected.</p>
+</div>
+
+<figure class="incident-evidence">
+	<img
+		src="/AI_workshop_KSU_symposium/conectors.png"
+		alt="A person and a model, each linked to the same cloud service"
+		class="privacy-image-full"
+	/>
+</figure>
+
+<div class="incident-body">
+	<p>Several companies offer this service. The mechanics are close enough that the vocabulary is almost interchangeable. What differs is who decides the connection is made, what the tool is allowed to do once connected, and what the vendor is willing to put in writing about it.</p>
+	<p><strong>Checking the documentation from the company behind the model is still the best way to learn the details about that specific tool.</strong></p>
+	<p>The table below summarizes some key questions about Claude, ChatGPT, Gemini and Copilot connectors.</p>
+</div>
+
+<div class="incident-body">
+	<p>No single official page answers all six questions for any vendor. The table below draws on the connector documentation, and where that ran out, on each vendor's privacy and training pages — eight official documents in total. <strong>What each company answers, and where it answers it, tells you who they think is asking.</strong></p>
+</div>
+
+<div class="privacy-table-wrap">
+<table class="privacy-table">
+	<colgroup>
+		<col style="width: 24ch" />
+		<col style="width: 28ch" />
+		<col style="width: 28ch" />
+		<col style="width: 28ch" />
+		<col style="width: 28ch" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">ChatGPT (OpenAI)</th>
+			<th scope="col">Claude (Anthropic)</th>
+			<th scope="col">Gemini Enterprise (Google)</th>
+			<th scope="col">M365 Copilot</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">What it is called</th>
+			<td>Apps</td>
+			<td>Connectors</td>
+			<td>Connectors or Workspace apps</td>
+			<td>Copilot connectors, formerly Microsoft Graph connectors.</td>
+		</tr>
+		<tr>
+			<th scope="row">Who turns it on</th>
+			<td><strong>You connect.</strong> Enabled by default on Business; disabled by default on Enterprise and Edu, where an admin enables them.</td>
+			<td><strong>You connect.</strong> On Team and Enterprise an Owner enables first, and each person still authenticates individually.</td>
+			<td><strong>An administrator</strong>, in the Google Cloud console.</td>
+			<td><strong>An administrator</strong>, in the admin center. Organization-level.</td>
+		</tr>
+		<tr>
+			<th scope="row">Read only, or can it act?</th>
+			<td><strong>Both.</strong> The default reads automatically and asks before actions that are sensitive or hard to undo.</td>
+			<td><strong>Both.</strong> Owners can set each permission to always allow, needs approval, or blocked.</td>
+			<td><strong>Both</strong>, depending on the connector.</td>
+			<td>Connectors bring data in. Acting happens through a separate mechanism, agents, which admins approve and which carry their own terms.</td>
+		</tr>
+		<tr>
+			<th scope="row">Indexed in advance, or fetched live?</th>
+			<td>Some apps support syncing to index content in advance.</td>
+			<td>Fetched at request time through MCP, from Anthropic's cloud. The documentation describes no advance indexing.</td>
+			<td>Both, and you choose: federation retrieves from the source without copying; ingestion copies into the Gemini index and re-syncs on a schedule, from every 30 minutes to every 7 days.</td>
+			<td>Both, and named: synced connectors index into Microsoft Graph, federated connectors fetch in real time via MCP without indexing.</td>
+		</tr>
+		<tr>
+			<th scope="row">Is retrieved content used for training?</th>
+			<td>On Free, Plus, Go and Pro, yes, if "Improve the model for everyone" is on. Not by default on Business, Enterprise and Edu.</td>
+			<td>Not addressed explicitly for connectors.</td>
+			<td>Content the Gemini app gets via apps is not used to train AI models and is not human-reviewed for the Workspace Gemini app; Gemini Enterprise is governed by Google Cloud's data-processing terms.</td>
+			<td>No. Prompts, responses, and data accessed through Microsoft Graph are not used to train the foundation models.</td>
+		</tr>
+		<tr>
+			<th scope="row">Where the connected service processes your data</th>
+			<td>Under each app's own terms and privacy policy, shown before you enable it.</td>
+			<td>On the service's own infrastructure, under its own terms, possibly outside the United States. A US-only inference setting does not change this.</td>
+			<td>For ingested data, you choose the storage region: global, US, or EU.</td>
+			<td>EU users stay inside the EU Data Boundary; queries from elsewhere may be processed in the US, EU, or other regions. Agents carry their own privacy terms.</td>
+		</tr>
+		<tr>
+			<th scope="row">Sources</th>
+			<td class="incident-sources"><a href="https://help.openai.com/en/articles/11487775-apps-in-chatgpt" target="_blank" rel="noopener noreferrer">Apps in ChatGPT</a></td>
+			<td class="incident-sources"><a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities" target="_blank" rel="noopener noreferrer">Use connectors</a> · <a href="https://privacy.claude.com/en/articles/10023555-how-do-you-use-personal-data-in-model-training" target="_blank" rel="noopener noreferrer">Model training</a></td>
+			<td class="incident-sources"><a href="https://cloud.google.com/gemini-enterprise/connectors" target="_blank" rel="noopener noreferrer">Connectors</a> · <a href="https://docs.cloud.google.com/gemini/enterprise/docs/connectors/introduction-to-connectors-and-data-stores" target="_blank" rel="noopener noreferrer">Data stores</a> · <a href="https://workspaceupdates.googleblog.com/2025/05/google-workspace-apps-are-now-generally-available-for-the-gemini-app.html" target="_blank" rel="noopener noreferrer">Workspace apps</a></td>
+			<td class="incident-sources"><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-copilot-connector" target="_blank" rel="noopener noreferrer">Connectors overview</a> · <a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-privacy" target="_blank" rel="noopener noreferrer">Copilot privacy</a></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p class="incident-sources">This is not legal or compliance advice. Verify current terms before relying on this table for anything sensitive.</p>
+
+<div class="featured-source">
+	<div class="incident-body">
+	<p><strong>So now the model can reach your files.</strong> and it is tempting to conclude that it <em>knows</em> them since your work is somehow in there.</p>
+	</div>
+</div>
+
+<div class="incident-body">
+	<p><strong>IT IS NOT!</strong></p>
+	<p> A connector controls what can the model reach. It says nothing about what the model keeps.<strong> Everything the connector retrieves gets read once, used for one answer, and released.</strong></p>
+</div>
+
+<h2>So how does it actually answer?</h2>
+
+<div class="incident-body">
+	<p>The model processed an enormous amount of text during training, and what it kept was a set of weights (numerical parameters encoding the patterns in that text).</p>
+	<p><strong>The model itself cannot reopen those texts, quote from them, or check anything against them.</strong></p>
+	<p><strong>It can reach outside its weights:</strong> a web search, a file you upload, a connector. Without one of those, the answer comes from the weights alone — the model is not looking anything up, it is <a href="https://openai.com/index/why-language-models-hallucinate/" target="_blank" rel="noopener noreferrer">generating what fits the shape of your question</a>.</p>
+	<p>Those three routes differ in where the content comes from. They do not differ in what happens to it once it arrives.</p>
+	<p>Everything you give the model arrives through one opening: the <strong>context window</strong>. The window is the whole of what the model knows about you, about this task, about this conversation.</p>
+	<p><strong>And it is "repainted" with every question.</strong></p>
+	<p></p>
+</div>
+
+<figure class="incident-evidence">
+	<img
+		src="/AI_workshop_KSU_symposium/memory2.png"
+		alt="Two panels: the same robot outside a window, with a different person and a different message framed in each"
+		class="privacy-image-full"
+	/>
+</figure>
+
+<div class="incident-body">
+	<p>Each message you send resends the entire conversation to be read again from the start, and the model does not remember having looked before. <a href="https://www.developerway.com/posts/how-ai-remembers-and-forgets-part1" target="_blank" rel="noopener noreferrer">The context is the only thing it holds about you</a>.</p>
+	<p>Every message you send resends the whole conversation. The window does not accumulate memories; it accumulates <em>text</em>.</p>
+</div>
+
+<figure class="incident-evidence">
+	<img
+		src="/AI_workshop_KSU_symposium/context_window.png"
+		alt="Two panels: the same robot outside a window, with a different person and a different message framed in each"
+		class="privacy-image-full"
+	/>
+</figure>
+
+<div class="incident-body">
+	<p><strong>Quality degrades well before the limit</strong>, and the degradation is not evenly distributed: models handle the beginning and the end of a long context reasonably well and lose the middle.</p>
+	<p></p>
+</div>
+
+<figure class="incident-evidence">
+	<img
+		src="/AI_workshop_KSU_symposium/contex_window2.png"
+		alt="Line charts: accuracy on multi-document question answering against the position of the document holding the answer, forming a U-shape that deepens as the number of documents grows"
+		class="incident-evidence-image"
+	/>
+	<figcaption class="incident-evidence-caption"><a href="https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00638/119630/Lost-in-the-Middle-How-Language-Models-Use-Long" target="_blank" rel="noopener noreferrer">Liu et al., Transactions of the ACL, 2024</a></figcaption>
+</figure>
+
+<div class="incident-body">
+	<p>The setup consists of a question and a stack of documents, only one of which contains the answer.</p>
+	<p>The researchers moved this document through the stack (x-axis) without changing anything else. Adding more material does not just dilute the relevant part but moves it into the region the model handles worst.</p>
+	<p><strong>The models tested are from 2023 but the patternstill happening.</strong></p>
+</div>
+
+<div class="incident-body">
+	<p><a href="https://www.developerway.com/posts/how-ai-remembers-and-forgets-part1" target="_blank" rel="noopener noreferrer">A developer ran this deliberately.</a> She put twenty of her own articles into a conversation and asked for a one-sentence summary of each, in a table.</p>
+	<p>The conversation was using 65% of the context window the model had available but, across repeated runs, <strong>the model returned sixteen to nineteen summaries instead of twenty, dropping articles from the middle of the list, carried claims from one article into another, tt invented numbers, and in one run it produced a twenty-first row.</strong></p>
+</div>
+
+
+<div class="featured-source">
+	<div class="incident-body">
+	<p><strong>The failure is silent and it looks like an answer.</strong> A dropped paper does not come back as an error, and a fabricated number does not arrive flagged. If you are writing an introduction from that table, or a methods paragraph from a long analysis session, nothing in the output tells you which parts were reconstructed.</p>
+	<p><strong>A long conversation is not a reproducible method.</strong> If an answer depends on what happened to be in the window at that moment, and the window is never the same twice, you cannot run it again and get it back.</p>
+	<p><strong>Practical takeaways:</strong></p>
+	<ul>
+		<li><strong>One task per conversation.</strong> </li>
+		<li><strong>Put critical instructions in a file, not in the chat.</strong></li>
+		<li><strong>Repeat the constraint when it matters.</strong></li>
+		<li><strong>Give the file, not the story about the file.</strong></li>
+		<li><strong>Check something you can verify.</strong></li>
+	</ul>
+	</div>
+</div>
