@@ -41,6 +41,14 @@ export default defineConfig({
 						href: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap',
 					},
 				},
+				{
+					tag: 'script',
+					attrs: {
+						src: 'https://gc.zgo.at/count.js',
+						'data-goatcounter': 'https://ksu-ai-workshop.goatcounter.com/count',
+						async: true,
+					},
+				},
 			],
 			sidebar: [
 				{
