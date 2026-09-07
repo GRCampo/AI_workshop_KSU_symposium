@@ -1,0 +1,125 @@
+---
+title: Create an R kernel for Jupyter
+---
+
+VS Code does not create kernels. That is why R does not appear in the kernel picker even after you install R.
+
+Follow the steps in order. 
+
+<p><strong> 1. Open the terminal inside VS:</strong> <code>Terminal &gt; New Terminal</code> <strong> or </strong> <code>Ctrl + ’</code> (apostrophe).</p> 
+<p>It should say PowerShell on the right-hand side of the terminal tab.</p>
+
+<p><strong> 2. Check whether R is installed</strong></p>
+<p>In PowerShell, `r` is a built-in alias for `Invoke-History`, and it captures the command before Windows looks for R. So run this instead:</p>
+
+```powershell
+Get-ChildItem "C:\Program Files\R" -ErrorAction SilentlyContinue
+```
+
+If a folder like `R-4.6.1` is listed, R is installed. <strong>Write the version number down</strong>
+
+<p><strong> 3. Make Jupyter findable</strong></p>
+<p>Run the check again:</p>
+
+```powershell
+jupyter --version
+```
+<p>If it is still not recognized, pip installed Jupyter into a folder that is not on your PATH. This is common and is not a failed installation.</p>
+
+<p><strong> 3.1</strong> Find the folder:</p>
+
+```powershell
+Get-ChildItem -Path "$env:APPDATA\Python" -Recurse -Filter "jupyter.exe" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty DirectoryName
+```
+<p><strong>3.2</strong> Copy the folder path it returns, and add it to the PATH of this terminal session, replacing the path below with your own:</p>
+
+```powershell
+$env:PATH = "C:\Users\yourname\AppData\Roaming\Python\Python313\Scripts;" + $env:PATH
+```
+<p><strong>3.3</strong>Confirm:</p>
+
+```powershell
+jupyter --version
+```
+<p>This change applies only to the terminal window you are in.</p>
+
+<p><strong> 4.Open R from the same terminal</strong></p>
+
+<p>Replace `4.6.1` with the version you found in step 2:</p>
+
+```powershell
+& "C:\Program Files\R\R-4.6.1\bin\R.exe"
+```
+<p>The prompt changes from `PS C:\>` to `>`. You are now inside R.</p>
+<p>The `&` is required because the path contains a space.</p>
+
+<p><strong> 5. Install the IRkernel package</strong></p>
+
+```r
+install.packages("IRkernel")
+```
+Pick any US mirror when it asks.
+
+<p><strong> 6. Register the kernel</strong></p>
+
+```r
+IRkernel::installspec()
+```
+<p>Nothing printed and the `>` prompt returns means it worked.</p>
+<p>If you get an error mentioning `jupyter kernelspec` or `status 127`, Jupyter is not on the PATH of this session.</p>
+
+<p><strong> 7. Leave R</strong></p>
+
+```r
+q()
+```
+<p>Answer `n` when it asks to save the workspace image.</p>
+
+<p><strong> 8. Confirm the kernel exists</strong></p>
+
+```powershell
+jupyter kernelspec list
+```
+`ir` should appear in the list, with a path ending in `\kernels\ir`.
+
+{/* TODO: screenshot — kernelspec list showing ir */}
+
+<p><strong> 9. Reload VS Code</strong></p>
+
+<p>Press `Ctrl + Shift + P`, type `Developer: Reload Window`, and run it.</p>
+
+<p><strong> 10. Select the R kernel</strong></p>
+
+<p>Create a notebook and point it at R.</p>
+
+<p><strong> 10.1</strong> On the Welcome tab, click New File...</p>
+<p><strong> 10.2</strong> Choose Jupyter Notebook from the list.</p>
+
+<figure class="incident-evidence">
+  <img
+    src="/AI_workshop_KSU_symposium/VS_r_kernel1.png"
+    alt="The VS Code Welcome tab with New File selected, and Jupyter Notebook chosen from the file type list"
+    class="incident-evidence-image"
+  />
+  <figcaption class="incident-evidence-caption">Steps 1 and 2.</figcaption>
+</figure>
+
+<p><strong> 10.3</strong> Click Select Kernel in the top right of the notebook.</p>
+<p><strong> 10.4</strong>Pick the entry named R. It shows the path to your R installation and is labelled Jupyter Kernel on the right.</p>
+
+<figure class="incident-evidence">
+  <img
+    src="/AI_workshop_KSU_symposium/VS_r_kernel2.png"
+    alt="The Select Kernel button in a VS Code notebook, and the R kernel listed with the path to the R installation"
+    class="incident-evidence-image"
+  />
+  <figcaption class="incident-evidence-caption">Steps 3 and 4. If R is not in the list, reload the window and try again.</figcaption>
+</figure>
+
+<p>Then run this in the first cell:</p>
+
+```r
+R.version.string
+```
+<p>If it returns your R version, you are done.</p>
+

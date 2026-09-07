@@ -1,0 +1,46 @@
+---
+import SidebarSublist from './SidebarSublist.astro';
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+
+const { sidebar, headings } = Astro.locals.starlightRoute;
+const pageHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<div class="ws-sidebar">
+	<SidebarSublist sublist={sidebar} headings={pageHeadings} />
+</div>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter {...Astro.props} />
+</div>
+
+<script>
+	const links = document.querySelectorAll('.ws-headings a');
+
+	if (links.length > 0) {
+		const byId = new Map();
+		links.forEach((link) => {
+			byId.set(decodeURIComponent(link.hash.slice(1)), link);
+		});
+
+		const targets = [...byId.keys()]
+			.map((id) => document.getElementById(id))
+			.filter(Boolean);
+
+		const update = () => {
+			let currentId = targets[0]?.id;
+			for (const target of targets) {
+				if (target.getBoundingClientRect().top <= 100) {
+					currentId = target.id;
+				} else {
+					break;
+				}
+			}
+			links.forEach((link) => link.classList.remove('active'));
+			byId.get(currentId)?.classList.add('active');
+		};
+
+		document.addEventListener('scroll', update, { passive: true });
+		update();
+	}
+</script>

@@ -1,0 +1,59 @@
+---
+title: Installing Jupyter
+---
+
+A Jupyter notebook is a file that holds code and its output together, in cells you run one at a time. 
+
+Instead of running a whole script and getting everything at once, <strong>you run one block, look at the result, and decide what to do next.</strong>
+
+<strong>Two different things named Jupyter</strong>.
+
+<ol>
+	<li><span class="path-badge path-badge--a">Jupyter extension in VS Code:</span> It is what opens notebooks and runs cells.</li>
+	<li><span class="path-badge path-badge--b">Jupyter package:</span> It is what registers kernels, including the R one.</li>
+</ol>
+
+<p><strong>Having the extension does not give you the package. YOU NEED BOTH.</strong></p>
+
+<div class="incident-card path-card--a">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="path-badge path-badge--a">Jupyter extension</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <ol>
+      <li>Open the Extensions panel in the left sidebar.</li>
+      <li>Search for <code>jupyter</code> and pick the one published by Microsoft.</li>
+      <li>Click Install.</li>
+    </ol>
+    <p><strong>Four other extensions install alongside it:</strong> Keymap, Notebook Renderers, Cell Tags and Slide Show.</p>
+  </div>
+  <figure class="incident-evidence">
+    <img
+      src="/AI_workshop_KSU_symposium/VS_jupyter_ext.png"
+      alt="The Extensions panel in VS Code, with the Jupyter extension by Microsoft selected and the Install button highlighted"
+      class="incident-evidence-image"
+    />
+    <figcaption class="incident-evidence-caption">The three steps, in order.</figcaption>
+  </figure>
+</div>
+
+<div class="incident-card path-card--b">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="path-badge path-badge--b">Jupyter package</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <ol>
+      <li>Open the terminal inside VS: <code>Terminal &gt; New Terminal</code> <strong> or </strong> <code>Ctrl + ’</code> (apostrophe)</li>
+      <li>Run <code>pip install jupyter</code> (It takes a minute or two)</li>
+      <li>Check that it worked running <code>jupyter --version</code>.<ol><li>If it prints a list of version numbers, you are done.</li><li>If it says the term is not recognized, Jupyter installed correctly but into a folder Windows does not search. </li><li>If <code>pip</code> is not recognized either, Python is not installed or was installed without being added to PATH. Go back to the previous page and install it before continuing.</li></ol></li>
+    </ol>
+  </div>
+</div>
+
+
+
+The next page connects R to Jupyter so it shows up as a kernel.

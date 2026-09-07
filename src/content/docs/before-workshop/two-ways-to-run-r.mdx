@@ -1,0 +1,57 @@
+---
+title: Two ways to run R in VS Code
+---
+
+There are two ways to run R inside Visual Studio Code. They need
+different things installed, and they are used differently. This page
+explains which one we are using and why, so the setup steps on the next
+page make sense.
+
+<div class="incident-card path-card--a">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="path-badge path-badge--a">Option 1</p>
+      <p class="incident-title">R scripts, directly</p>
+    </div>
+  </div>
+  <div class="incident-body">
+	<p>VS Code has an R extension that runs `.R` files the way you would run them in RStudio: you write a script, send lines to an R console, and plots appear in a side panel.</p>
+	<p>It needs R installed and nothing else. <strong>It's the lighter option.</strong></p> 
+	<p><a href="https://code.visualstudio.com/docs/languages/r" target="_blank" rel="noopener noreferrer">Click here for instructions.</a></p>
+  </div>
+</div>
+
+<p><strong>We will use Option 2.</strong> If you prefer Option 1, it will work but the screenshots will not match.</p>
+
+<div class="incident-card path-card--b">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="path-badge path-badge--b">Option 2</p>
+      <p class="incident-title">R in a Jupyter notebook</p>
+    </div>
+  </div>
+  <div class="incident-body">
+	  <p>A notebook mixes code, output and written explanation in the same file, in cells you run one at a time, and each result stays next to the code that produced it.</p>
+	  <p><strong>That matters for this workshop for two reasons:</strong> you can re-run one step without re-running everything above it, and the whole file (code, output and your notes) is readable as a single document later.</p>
+  </div>
+</div>
+
+## What you need installed
+
+Two things:
+
+<div class="lang-grid">
+  <img src="/AI_workshop_KSU_symposium/r_code.png" alt="R logo" class="lang-grid-logo" />
+  <div class="lang-grid-text">
+    <p><strong>R</strong> this is what actually runs your code.</p>
+    <p></p>
+    <p><a href="https://www.r-project.org/" target="_blank" rel="noopener noreferrer">Click here to download R</a></p>
+  </div>
+  <img src="/AI_workshop_KSU_symposium/python_code.png" alt="Python logo" class="lang-grid-logo" />
+  <div class="lang-grid-text">
+    <p><strong>Python</strong> does not run any of your R code. It is needed only because the tool that registers a Jupyter kernel is a Python program. Once the kernel is registered, Python is out of the way.</p>
+    <p></p>
+    <p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Click here to download Python.</a></p>
+
+  </div>
+</div>

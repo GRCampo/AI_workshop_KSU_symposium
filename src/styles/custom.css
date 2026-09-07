@@ -240,7 +240,7 @@ h6 {
 	display: flex;
 	flex-direction: column;
 	gap: 2.5rem; /* espaço entre blocos — nitidamente maior que o ritmo de parágrafo (1.25rem) dentro de cada bloco */
-	padding: 2rem;
+	padding: 2rem 1rem;
 	background: var(--sl-color-highlight-low);
 	border-radius: 1rem;
 	text-align: left;
@@ -284,7 +284,7 @@ h6 {
 /* Blocos de texto do "About Me" (TEXT 1, 2 e 3): mesma largura de leitura,
    independente de estarem sozinhos ou abaixo de uma imagem. */
 .home-ai-block {
-	max-width: 68ch;
+	max-width: 85ch;
 	margin-inline: auto;
 	display: flex;
 	flex-direction: column;
@@ -943,4 +943,204 @@ h6 {
 	left: 0;
 	z-index: 1;
 	background-color: var(--sl-color-bg);
+}
+
+/* ============================================================
+   Custom sidebar (Sidebar component override)
+   Starlight's own sidebar styles are scoped to its internal
+   component, so the overridden markup needs its own rules.
+   Colors reuse the existing --sl-* variables.
+   ============================================================ */
+
+.ws-sidebar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ws-sidebar > .ws-list > li + li {
+	margin-top: 0.9rem;
+}
+
+.ws-sidebar a {
+	display: block;
+	color: var(--sl-color-gray-2);
+	text-decoration: none;
+	line-height: 1.4;
+	padding: 0.3em var(--sl-sidebar-item-padding-inline);
+	border-radius: 0.25rem;
+	overflow-wrap: anywhere;
+}
+
+.ws-sidebar a:hover,
+.ws-sidebar a:focus-visible {
+	color: var(--sl-color-white);
+}
+
+.ws-sidebar a[aria-current='page'] {
+	color: var(--sl-color-text-invert);
+	background-color: var(--sl-color-text-accent);
+	font-weight: 600;
+}
+
+/* Group headers and top-level standalone links share the same weight */
+.ws-sidebar summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	cursor: pointer;
+	padding: 0.2em var(--sl-sidebar-item-padding-inline);
+	list-style: none;
+}
+
+.ws-sidebar summary::marker,
+.ws-sidebar summary::-webkit-details-marker {
+	display: none;
+}
+
+.ws-group-label,
+.ws-sidebar a.ws-top-link {
+	font-size: var(--sl-text-base);
+	font-weight: 600;
+	color: var(--sl-color-white);
+}
+
+.ws-sidebar a.ws-top-link[aria-current='page'] {
+	color: var(--sl-color-text-invert);
+}
+
+.ws-caret {
+	flex-shrink: 0;
+	transition: transform 0.15s ease;
+}
+
+.ws-sidebar details[open] > summary .ws-caret {
+	transform: rotate(180deg);
+}
+
+/* Page headings shown under the active entry */
+.ws-headings {
+	margin: 0.25rem 0 0.5rem var(--sl-sidebar-item-padding-inline);
+	padding-inline-start: 0.7rem;
+	border-inline-start: 1px solid var(--sl-color-hairline-light);
+}
+
+.ws-headings a {
+	font-size: var(--sl-text-sm);
+	font-weight: 400;
+	color: var(--sl-color-gray-3);
+	padding-block: 0.2em;
+}
+
+.ws-headings .ws-depth-3 a {
+	padding-inline-start: 1.1rem;
+}
+
+.ws-headings a.active {
+	color: var(--sl-color-text-accent);
+	font-weight: 600;
+}
+
+/* ============================================================
+   PATH CARDS (installation-tutorial) — accent modifiers used
+   alongside .incident-card, plus the OR divider between them.
+   Nothing here redefines .incident-card itself.
+
+   Cascade note: in light mode :root[data-theme='light']
+   .incident-card sets `border: none` at specificity (0,3,0),
+   which would wipe a plain .incident-card.path-card--x (0,2,0)
+   left border. Each modifier therefore lists a light-mode
+   selector (0,4,0) alongside the base one, so the accent
+   survives in BOTH themes without touching the existing rule
+   and without depending on source order.
+   ============================================================ */
+
+.incident-card.path-card--a,
+:root[data-theme='light'] .incident-card.path-card--a {
+	border-left: 4px solid var(--sl-color-accent);
+}
+
+.incident-card.path-card--b,
+:root[data-theme='light'] .incident-card.path-card--b {
+	border-left: 4px solid var(--sl-color-highlight);
+}
+
+/* Eyebrow above the card title — same small/bold/uppercase
+   treatment as .privacy-quiz-answer-label. Colour lives on the
+   badge text only; card body text keeps its normal colour.
+   margin: 0 because .incident-heading already spaces its
+   children with gap: 0.25rem. */
+.path-badge {
+	margin: 0;
+	font-size: var(--sl-text-sm);
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+}
+
+.path-badge--a {
+	color: var(--sl-color-accent);
+}
+
+.path-badge--b {
+	color: var(--sl-color-highlight);
+}
+
+/* "OR" divider: a rule on each side of the word, drawn with
+   pseudo-elements so the markup stays a single element. Greys
+   only — this has to read with no colour at all. */
+.path-or {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-block: 1.5rem;
+	font-size: var(--sl-text-sm);
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+.path-or::before,
+.path-or::after {
+	content: '';
+	flex: 1;
+	height: 1px;
+	background-color: var(--sl-color-gray-5);
+}
+
+/* ============================================================
+   LANGUAGE GRID (two-ways-to-run-r) — two rows of
+   [logo | text], one row per language. Not a 2x2: each row is
+   its own logo/text pair, so the two columns stay aligned down
+   the page. Gap matches the 1.5rem rhythm .incident-card
+   already uses, and the single-column collapse reuses the same
+   768px breakpoint as .privacy-columns.
+   ============================================================ */
+
+.lang-grid {
+	display: grid;
+	grid-template-columns: 15% 1fr;
+	gap: 1.5rem;
+	align-items: start;
+}
+
+.lang-grid-logo {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.lang-grid-text p {
+	margin: 0;
+}
+
+@media (max-width: 768px) {
+	.lang-grid {
+		grid-template-columns: 1fr;
+	}
+	.lang-grid-logo {
+		max-width: 120px;
+	}
 }

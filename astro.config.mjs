@@ -50,14 +50,12 @@ export default defineConfig({
 					},
 				},
 			],
+			tableOfContents: false,
+			components: {
+				Sidebar: './src/components/Sidebar.astro',
+			},
 			sidebar: [
-				{
-					label: 'Before the workshop',
-					items: [
-						{ label: 'Requirements', slug: 'before-workshop/requirements' },
-						{ label: 'Installation Tutorial', slug: 'before-workshop/installation-tutorial' },
-					],
-				},
+				{ label: 'Requirements for the hands-on', slug: 'before-workshop/requirements' },
 				{
 					label: 'Before You Prompt',
 					items: [
@@ -73,6 +71,15 @@ export default defineConfig({
 						{ label: 'Data Wrangling', slug: 'hands-on/data-wrangling' },
 						{ label: 'Data Exploration', slug: 'hands-on/data-exploration' },
 						{ label: 'Data Visualization', slug: 'hands-on/data-visualization' },
+					],
+				},
+				{
+					label: 'Tutorials',
+					items: [
+						{ slug: 'before-workshop/installation-tutorial' },
+						{ label: 'Two ways to run R in VS Code', slug: 'before-workshop/two-ways-to-run-r' },
+						{ label: 'Installing Jupyter', slug: 'before-workshop/installing-jupyter' },
+						{ label: 'Running R in a Jupyter notebook', slug: 'before-workshop/r-kernel-jupyter' },
 					],
 				},
 			],

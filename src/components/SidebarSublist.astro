@@ -1,0 +1,53 @@
+---
+import Self from './SidebarSublist.astro';
+
+const { sublist, headings, nested = false } = Astro.props;
+---
+
+<ul class:list={['ws-list', { 'ws-nested': nested }]}>
+	{
+		sublist.map((entry) =>
+			entry.type === 'link' ? (
+				<li>
+					<a
+						href={entry.href}
+						class:list={{ 'ws-top-link': !nested }}
+						aria-current={entry.isCurrent ? 'page' : undefined}
+					>
+						{entry.label}
+					</a>
+					{entry.isCurrent && headings.length > 0 && (
+						<ul class="ws-headings">
+							{headings.map((heading) => (
+								<li class={`ws-depth-${heading.depth}`}>
+									<a href={`#${heading.slug}`}>{heading.text}</a>
+								</li>
+							))}
+						</ul>
+					)}
+				</li>
+			) : (
+				<li>
+					<details open={!entry.collapsed}>
+						<summary>
+							<span class="ws-group-label">{entry.label}</span>
+							<svg
+								class="ws-caret"
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								aria-hidden="true"
+							>
+								<polyline points="6 9 12 15 18 9" />
+							</svg>
+						</summary>
+						<Self sublist={entry.entries} headings={headings} nested />
+					</details>
+				</li>
+			)
+		)
+	}
+</ul>
