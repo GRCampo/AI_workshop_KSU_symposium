@@ -59,7 +59,7 @@ export default defineConfig({
 				{
 					label: 'Before You Prompt',
 					items: [
-						{ label: 'Real-World Incidents', slug: 'before-you-prompt/real-world-incidents' },
+						{ label: 'Ways It Can Go Wrong', slug: 'before-you-prompt/real-world-incidents' },
 						{ label: 'Privacy & Security', slug: 'before-you-prompt/privacy-and-security' },
 						{ label: 'Research Tools', slug: 'before-you-prompt/research-tools' },
 						{ label: 'Access & Memory', slug: 'before-you-prompt/access-and-memory' },

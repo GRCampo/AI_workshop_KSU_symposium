@@ -1144,3 +1144,99 @@ h6 {
 		max-width: 120px;
 	}
 }
+
+/* ============================================================
+   SLIDE DECK — generic image pager. Nothing here is tied to a
+   particular page, so it can be dropped onto any of them.
+
+   Every slide ships in the HTML and the script hides all but
+   one at init, so with JS off the reader gets the full stack of
+   images instead of an empty frame. The controls would be dead
+   in that state, so they stay hidden until the script adds
+   .slide-deck--ready.
+   ============================================================ */
+
+.slide-deck {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	margin-block: 1.5rem;
+}
+
+.slide-deck-frame {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.slide-deck-slide {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 0.5rem;
+}
+
+/* Once the script is driving, the frame holds one slide at a
+   time and the image becomes the primary click target. */
+.slide-deck--ready .slide-deck-slide {
+	cursor: pointer;
+}
+
+/* An author display rule outranks the user-agent [hidden] rule,
+   so hiding has to be forced — the same cascade trap already
+   documented on .privacy-quiz-answer[hidden]. */
+.slide-deck-slide[hidden] {
+	display: none !important;
+}
+
+.slide-deck-controls {
+	display: none;
+}
+.slide-deck--ready .slide-deck-controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.slide-deck-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	border: 2px solid var(--sl-color-accent);
+	border-radius: 0.5rem;
+	background: transparent;
+	color: var(--sl-color-accent);
+	font-family: inherit;
+	font-size: var(--sl-text-lg);
+	line-height: 1;
+	cursor: pointer;
+	transition:
+		background-color 0.15s ease,
+		color 0.15s ease;
+}
+.slide-deck-btn:hover:not(:disabled) {
+	background-color: var(--sl-color-accent);
+	color: var(--sl-color-black);
+}
+.slide-deck-btn:focus-visible {
+	outline: 2px solid var(--sl-color-accent);
+	outline-offset: 2px;
+}
+
+/* The deck stops at both ends rather than wrapping, so the
+   dead button says so instead of silently doing nothing. */
+.slide-deck-btn:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+
+.slide-deck-counter {
+	margin: 0;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+	font-variant-numeric: tabular-nums;
+}
