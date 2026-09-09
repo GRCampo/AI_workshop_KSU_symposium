@@ -68,9 +68,12 @@ export default defineConfig({
 				{
 					label: 'Hands-on',
 					items: [
-						{ label: 'Data Wrangling', slug: 'hands-on/data-wrangling' },
-						{ label: 'Data Exploration', slug: 'hands-on/data-exploration' },
-						{ label: 'Data Visualization', slug: 'hands-on/data-visualization' },
+						{ label: 'Our data', slug: 'hands-on/our-data' },
+						{ label: 'The driving question', slug: 'hands-on/driving-question' },
+						{ label: 'The naive path: Just ask it!', slug: 'hands-on/naive-path' },
+						{ label: 'My Guide', slug: 'hands-on/my-guide' },
+						{ label: 'Applying it', slug: 'hands-on/applying-it' },
+						{ label: 'Take Home', slug: 'hands-on/take-home' },
 					],
 				},
 				{

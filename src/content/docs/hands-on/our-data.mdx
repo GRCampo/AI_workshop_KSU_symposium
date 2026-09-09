@@ -1,0 +1,142 @@
+---
+title: Our data
+tableOfContents: false
+---
+
+<div class="slide-deck" tabindex="0" aria-roledescription="carousel" aria-label="Slideshow">
+  <div class="slide-deck-frame">
+    <img class="slide-deck-slide" src="/AI_workshop_KSU_symposium/HO_1.1.png" alt="" />
+    <img class="slide-deck-slide" src="/AI_workshop_KSU_symposium/HO_1.2.png" alt="" loading="lazy" />
+    <img class="slide-deck-slide" src="/AI_workshop_KSU_symposium/HO_1.3.png" alt="" loading="lazy" />
+
+  </div>
+  <div class="slide-deck-controls">
+    <button type="button" class="slide-deck-btn slide-deck-prev" aria-label="Previous slide">‹</button>
+    <p class="slide-deck-counter">1 / 3</p>
+    <button type="button" class="slide-deck-btn slide-deck-next" aria-label="Next slide">›</button>
+  </div>
+</div>	
+
+<div class="incident-card">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="incident-title">Late leaf rust in raspberry</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <p>An interspecific raspberry population was scored for resistance to late leaf rust, by eye and by drone, in the same field trial.</p>
+    <p>The data are the supplementary files of <a href="https://doi.org/10.1093/g3journal/jkae203" target="_blank" rel="noopener noreferrer">Prado et al. (2024)</a>, published open access.</p>
+  </div>
+</div>
+
+## Files
+
+Both files describe **the same plots in the same trial**. One holds the severity scores recorded by a person and the other holds Vegetation Index (VI) values from drone imagery.
+
+| | What it holds | How it was measured |
+|---|---|---|
+| `DataS6.csv` | Disease severity scores | By eye, in the field |
+| `DataS7.csv` | Vegetation indices from imagery | By drone |
+
+## Download the data
+
+```bash
+git clone https://github.com/MelinaPrado/RaspberryRust.git
+```
+
+Now open that folder in VS Code and set up a notebook to work in.
+
+<p><strong>1. Open the folder</strong></p>
+<p>In VS Code: <code>File &gt; Open Folder</code>, then select the <code>RaspberryRust</code> folder you just cloned. The Explorer panel on the left should now show a <code>Data</code> folder containing the two CSV files.</p>
+
+<p><strong>2. Create a notebook</strong></p>
+<p>Press <code>Ctrl + Shift + P</code> to open the Command Palette, type <code>Create: New Jupyter Notebook</code> and press Enter.</p>
+<p>Save it with <code>Ctrl + S</code>, <strong>inside the RaspberryRust folder</strong>. The name does not matter; the location does.</p>
+
+<p><strong>3. Select the R kernel</strong></p>
+<p>Click <code>Select Kernel</code> in the top right corner of the notebook, choose <code>Jupyter Kernel...</code>, and pick <strong>R</strong> from the list.</p>
+<p>If R is not in the list, the kernel has not been registered yet. Go back to <a href="/AI_workshop_KSU_symposium/r-kernel-jupyter/">Create an R kernel for Jupyter</a> and run those steps first.</p>
+{/* TODO: confirm the slug of the R kernel page after the sidebar restructure */}
+
+<p><strong>4. Check where R is running</strong></p>
+<p>In the first cell:</p>
+
+```r title="setup"
+rm(list = ls())
+getwd()
+```
+
+<p>If the path printed ends in <code>RaspberryRust</code>, you are in the right place and every path below will work as written.</p>
+<p>If it does not, point R at the folder yourself:</p>
+
+```r title="only if getwd() is wrong"
+setwd("path/to/your/files/RaspberryRust")
+```
+
+Every path below is relative to that folder.
+
+### DataS6: Severity scores
+
+The first eight columns describe the trial design and the last four are the disease scores.
+
+```r title="Visual scores"
+df_scores <- read.csv("Data/DataS6.csv")
+head(df_scores)
+```
+
+```text frame="terminal"
+  genotype checkId Plot Inoc Rep Row Col Block Sev11 Sev13 Sev15 Sev17
+1       NA  Salmon    2    I   1   1   2     1  3.00  3.33  4.33  5.33
+2     JG24 noCheck    3    I   1   1   3     1  1.00  1.67  4.00  4.33
+3     JG18 noCheck    4    I   1   1   4     1  0.33  0.33  0.33    NA
+4     JG16 noCheck   10    I   1   2   5     1  0.33  0.33  0.33  0.33
+5     JT34 noCheck   11    I   1   2   5     1  1.33  1.67  2.00  2.00
+6      JS1 noCheck   13    I   1   2   2     1  3.00  4.00  4.33  4.67
+```
+
+| Column | What it is |
+|---|---|
+| `genotype` | Genotype ID |
+| `checkId` | Whether the plot is a check, and if so, which one |
+| `Plot` | Plot ID |
+| `Inoc` | Treatment |
+| `Rep` | Replicate |
+| `Row` | Row number in the field |
+| `Col` | Column number in the field |
+| `Block` | Block number |
+| `Sev11` | Severity score, 11 days after inoculation |
+| `Sev13` | Severity score, 13 days after inoculation |
+| `Sev15` | Severity score, 15 days after inoculation |
+| `Sev17` | Severity score, 17 days after inoculation |
+
+### DataS7: VIs
+
+The design columns are the same as above. The new columns are the time point and the vegetation indices.
+
+```r title="High-throughput phenotyping"
+df_htp <- read.csv("Data/DataS7.csv")
+head(df_htp)
+```
+
+```text frame="terminal"
+  genotype plot row col block rep inoc pheno checkId mean_NDVI mean_OSAVI median_NDVI median_OSAVI
+1       NA    2   1   2     1   1    I Sev01  Salmon 0.6989238  0.8107488   0.7163691    0.8309854
+2     JG24    3   1   3     1   1    I Sev01 noCheck 0.6538972  0.7585181   0.7007925    0.8129167
+3     JG18    4   1   4     1   1    I Sev01 noCheck 0.5554905  0.6443668   0.5637605    0.6539600
+4     JG16   10   2   5     1   1    I Sev01 noCheck 0.6886442  0.7988245   0.6989567    0.8107876
+5     JT34   11   2   4     1   1    I Sev01 noCheck 0.6091031  0.7065571   0.6341697    0.7356340
+6      JS1   13   2   2     1   1    I Sev01 noCheck 0.6302254  0.7310589   0.6511721    0.7553571
+```
+
+| Column | What it is |
+|---|---|
+| `pheno` | Time point of the flight, labelled like the severity columns |
+| `mean_NDVI` / `median_NDVI` | Normalized Difference Vegetation Index, per plot |
+| `mean_OSAVI` / `median_OSAVI` | Optimized Soil-Adjusted Vegetation Index, per plot |
+
+<div class="featured-source">
+  <p><strong>Before we prompt anything:</strong> you have two tables, a set of genotypes, a field layout and two ways of measuring the same disease.</p>
+  <p>What would you do with them? What would you want to find out, and why?</p>
+</div>
+
+<script src="/AI_workshop_KSU_symposium/slide-deck.js"></script>

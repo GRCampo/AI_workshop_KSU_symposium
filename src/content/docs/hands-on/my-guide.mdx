@@ -1,0 +1,116 @@
+---
+title: My Guide
+tableOfContents: false
+---
+<div class="featured-source">
+  <p><strong>This guide is not a literature review.</strong> It comes from using these tools daily in my own analyses, from the mistakes that cost me time, and from what other researchers report in forums and public write-ups.</p>
+  <p>Treat it as a working protocol, not a standard. <strong>If a step does not fit your data, change it!</strong> But decide that on purpose.</p>
+</div>
+
+<div class="incident-card guide-card">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="incident-title">Before you start</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <p><span class="path-badge path-badge--a">Human:</span><strong>Write the biological question.</strong></p>
+    <p><span class="path-badge path-badge--a">Human:</span><strong>Classify your data.</strong></p>
+    <p style="padding-left: 3.5rem;">Sensitive or public? The class decides which tool you are allowed to use.</p>
+    <p><span class="path-badge path-badge--a">Human:</span><strong>Protect the raw data.</strong></p>
+    <p style="padding-left: 3.5rem;">Make it read-only, or keep it under version control.</p>
+    <p style="padding-left: 3.5rem;">Telling the AI "do not touch this file" will not stop it.</p>
+  </div>
+</div>
+
+<div class="incident-card guide-card">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="incident-title">During the analysis</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <ul class="guide-list">
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Write a fixed file with the rules.</strong></p>
+        <p style="padding-left: 3.5rem;">Anything critical belongs in a file that is read again every time.</p>
+        <p style="padding-left: 3.5rem;">e.g. data description, column meanings, goals, what the AI must not do, etc.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Decide if the task needs reference material:</strong> if it does, send it!</p>
+        <p style="padding-left: 3.5rem;">Papers, an old script, the package documentation, etc. Do not rely on what the model remembers.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--b">Human + AI</span><strong>Plan the analysis before any code.</strong></p>
+        <p style="padding-left: 3.5rem;">Ask it to explain what it will do and why, and to wait. When you have a plan, it is faster than debugging a wrong result.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Say what to do, and say how far to go</strong> (yes, these are two different things).</p>
+        <p style="padding-left: 3.5rem;">A long, detailed prompt can still be a wide one. Detail is about clarity while scope is about limits.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Keep asking why and how.</strong></p>
+        <p style="padding-left: 3.5rem;">If you cannot explain a step without opening the chat again, you do not own that step yet.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--b">Human + AI</span><strong>Check the data.</strong></p>
+        <p style="padding-left: 3.5rem;">Rows, factor levels, missing values, ranges, etc. Compare them with what you know from the field, not with what the AI said about them.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="incident-card guide-card">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="incident-title">After</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <ul class="guide-list">
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--b">Human + AI</span><strong>Check if the result holds when the execution changes.</strong></p>
+        <p style="padding-left: 3.5rem;">Run it again, or ask a second model. If the result changes, you'll have to find out why.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Do not accept a result just because it matches what you expected.</strong></p>
+        <p style="padding-left: 3.5rem;">A result you did not have to build is a result you did not have to think through.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Ask if it answers your biological question.</strong></p>
+        <p style="padding-left: 3.5rem;">A correct number that answers a different question is still the wrong result.</p>
+      </li>
+      <li class="guide-item">
+        <p><span class="path-badge path-badge--a">Human</span><strong>Document the process.</strong></p>
+        <p style="padding-left: 3.5rem;">Prompts, decisions, and checks can save you from repeating the same mistakes.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="incident-card path-card--b guide-aside guide-card">
+  <div class="incident-header">
+    <div class="incident-heading">
+      <p class="incident-title">Keep an eye on...</p>
+    </div>
+  </div>
+  <div class="incident-body">
+    <ul class="guide-list">
+      <li class="guide-item">
+        <p><strong>Simple request, complex execution.</strong></p>
+        <p style="padding-left: 3.5rem;">If you asked for one column and it rewrote the script, it's important to look at what changed, not only if it ran.</p> 
+        <p><strong>Data created or removed without permission.</strong></p>
+        <p><strong>Rows that disappear in silence.</strong></p>
+        <p style="padding-left: 3.5rem;">A filter, a join, or a text column forced into numeric without a warning message.</p>
+        <p><strong>Numbers in the text that did not come from the code.</strong></p>
+        <p style="padding-left: 3.5rem;">The written summary may not match the object it produced.</p>
+        <p><strong>Functions or arguments that do not exist.</strong></p>
+        <p><strong>An AI that agrees with you too easily.</strong></p>
+        <p style="padding-left: 3.5rem;">Say "I think it should be X" and watch it agree. Ask for the argument against instead.</p>
+        <p><strong>Long conversations forget the early rules.</strong></p>
+        <p><strong>Connectors with invisible instructions and permissions.</strong></p>
+        <p style="padding-left: 3.5rem;">A file or a connected service can carry text the model reads as an instruction.</p>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+---
+title: Applying it
+tableOfContents: false
+---
+## Before you start
+
+<p class="path-badge guide-check-rule">Our question</p>
+
+<div class="hypothesis-grid">
+    <div class="hypothesis-card hypothesis-card--featured">
+
+      <div class="incident-heading">
+          <p class="path-badge path-badge--a">Vegetation indices capture rust damage at the canopy level.</p>
+      </div>
+         <p class="hypothesis-body">Rust lesions destroy photosynthetically active tissue, so NDVI and OSAVI will decrease as visual severity increases. The association will be weak at the early scoring dates, when lesions are too small to alter canopy reflectance, and strengthen as damage accumulates.</p>
+    </div>
+</div>
+
+<p class="path-badge guide-check-rule">Data classification</p>
+
+Public.
+
+<p class="path-badge guide-check-rule">Protect the raw data.</p>
+
+The data came from a repository, so the original is safe. Without that, make the file read-only and/or a security copy.
+
+## During the analysis
+
+<p class="path-badge guide-check-rule">Write a fixed file with the rules</p>
+
+```text title="rules.md"
+# Analysis rules
+
+Read this file at the start of every session, before answering anything.
+
+## The question
+
+Do vegetation indices capture rust damage at the canopy level?
+
+Expected: rust lesions destroy photosynthetically active tissue, so NDVI and
+OSAVI decrease as visual severity increases. The association should be weak at
+the early scoring dates and strengthen as damage accumulates.
+
+## The data
+
+Raspberry greenhouse trial, interspecific population, scored for late leaf rust by
+eye and by drone in the same plots.
+
+`Data/DataS6.csv`: visual scores. One row per plot.
+`Data/DataS7.csv`: drone imagery. One row per plot per flight.
+
+The two files describe the same plots in the same trial.
+
+### DataS6 columns
+genotype, checkId, Plot, Inoc, Rep, Row, Col, Block: trial design
+Sev11, Sev13, Sev15, Sev17: severity scored at 11, 13, 15 and 17 days after
+inoculation. 
+Wide format: one column per date.
+
+### DataS7 columns
+genotype, plot, row, col, block, rep, inoc, checkId: trial design
+pheno: time point of the flight
+mean_NDVI, median_NDVI, mean_OSAVI, median_OSAVI: vegetation indices per plot
+
+## Known about this data
+
+- Column names differ in case between the two files (`Plot` vs `plot`).
+- Severity is wide, VIs are long. They cannot be joined without reshaping one.
+- Some plots appear in DataS7 but not in DataS6 (126 and 312). 
+- Missing values are real. Do not fill or drop them without
+  telling me first.
+- TODO: state how the `pheno` labels in DataS7 map onto the Sev11-Sev17 dates,
+  and whether there are flights with no matching scoring date.
+- `NA` in `genotype` does not mean missing data. It means the plot is not an
+  offspring of the cross: the identity of that plot is in `checkId`. Only when
+  both `genotype` and `checkId` are NA is the value actually missing.
+- The first two letters of a `genotype` value identify the family that genotype
+  belongs to.
+- The design is unbalanced. Do not assume equal numbers per genotype, family or
+  date, and do not use any method that requires balance without telling me.
+- Only Sev11, Sev13 and Sev17 exist in both files.
+- Negative NDVI and OSAVI values are present. Negative means red reflectance
+  exceeded near-infrared, which canopy does not produce. Flag them, do not
+  silently drop them.
+- There are also real NA values in the vegetation index columns.
+
+## Rules
+
+- Never modify, overwrite or move any file inside `Data/`.
+- Explain what you plan to do and wait. Do not write code in the same reply.
+- Before joining anything, report the number of rows before and after, and say
+  what happened to any row that was lost.
+- Do not change the analysis I asked for into a different one. If you think the
+  question is wrong, say so and stop.
+- Do not report a number in prose that did not come from code that ran.
+- If a package, function or argument is not certain, say so instead of guessing.
+
+## Conventions
+
+- Language: R. TODO: base R, tidyverse, or either?
+- Working directory is the repository root; all paths are relative to it.
+- TODO: plotting package, and whether figures are wanted at all at this stage.
+```
+
+<p class="path-badge guide-check-rule">Decide if the task needs reference material</p>
+
+<p>No. A correlation between two variables measured on the same plots is standard work, and the model has seen it a thousand times. <strong>Sending a paper here would add tokens without adding accuracy.</strong></p>
+
+<p><strong>That answer changes with the analysis.</strong> If this moved to AUDPC, to spatial correction, or to any method I could not check by eye, I would send the reference before the prompt.</p>
+
+<p class="path-badge guide-check-rule">Plan the analysis before any code</p>
+
+<p><strong>This analysis may be seem obvious:</strong> reshape, join, correlate.</p>
+<p>However we need to take care for everything inside it:</p>
+<ol>
+    <li>Mean or median VI?</li>
+    <li>NDVI, OSAVI or both?</li>
+    <li>Pearson or Spearman?</li>
+    <li>Are the negative values also included?</li>
+    <li>Are each date is correlated separately?</li>
+</ol>
+ 
+<p><strong>The model will decide all of that without asking</strong>, and the code will run either way. So I ask for the plan first, and I compare it against the decisions I would have made.</p>
+
+```text title="Planing the analysis"
+Before writing any code, describe how you would test whether NDVI and OSAVI
+decrease as visual severity increases, at each scoring date.
+
+List every decision the analysis requires and give me the options for each one,
+with the trade-off. Do not choose for me and do not write code.
+```
+<p class="path-badge guide-check-rule">Say what to do, and say how far to go</p>
+
+```text title="Merge and reshape"
+Following the plan we agreed on, reshape DataS6 to long format and join it to DataS7.
+
+Stop there. No correlation, no plots, no interpretation.
+Do not drop or impute any row. Report the number of rows before and after the
+join, and list anything that did not find a match.
+```
+<p class="path-badge guide-check-rule">Check the data</p>
+
+```text title="Look at the joined object"
+Read rules.md first.
+
+Describe the joined object, so I can see what I have before analysing anything.
+Report only. Do not fix, recode, impute, filter or drop anything you find.
+
+  - rows before and after the join
+  - every row that lost its match, and why
+  - number of plots per date, and whether it is the same for every date
+  - for genotype and checkId: every distinct value and how often it occurs
+  - for severity and for each vegetation index: min, max, mean, median, number of
+    NA, and a histogram
+
+Then list anything you found that contradicts what rules.md says about this data,
+or that rules.md does not mention at all.
+
+Stop after the report. No correlation, no plots beyond the histograms, no
+interpretation.
+
+Put the result in DEMO.ipynb as alternating cells: a markdown cell saying what the
+next block checks and why it matters, then the code cell that runs it. One check
+per pair of cells.
+```
+<p class="path-badge guide-check-rule">Keep asking why and how</p>
+
+```text title="Correlation"
+Following the plan, calculate the correlation between median NDVI and visual
+severity, separately for Sev11, Sev13 and Sev17.
+
+Return the correlation table only: coefficient, n, and p-value per date.
+No plots, no models, no interpretation.
+```
+```text title="Why and how"
+For the code you just ran:
+
+Which correlation method did you use, and why that one for a visual severity
+score rather than the alternative?
+What did you do with the negative vegetation index values, and with the NA?
+Where does the n for each date come from — which rows entered and which did not?
+
+Answer in prose. Do not rewrite the code.
+```
+<p>This took longer than asking for the answer. For anyone who knows R and basic statistics, it took longer than doing it by hand.</p>
+<p>That trade only looks bad on a task this size. The steps stay the same as the analysis grows, and doing it by hand stops being an option long before the checking does.</p>
+<p>None of this required knowing anything about AI. It required knowing the data, knowing the question, and deciding where to stop.</p>

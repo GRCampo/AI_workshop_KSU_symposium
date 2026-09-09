@@ -1,0 +1,105 @@
+---
+title: "The naive path: Just ask it!"
+tableOfContents: false
+---
+
+<div class="hypothesis-grid">
+    <div class="hypothesis-card hypothesis-card--featured">
+
+      <div class="incident-heading">
+          <p class="path-badge path-badge--a">Genotypes differ in resistance to late leaf rust?</p>
+      </div>
+         <p class="hypothesis-body">Inoculation will raise severity relative to control plots, but not equally across genotypes. The most resistant genotypes will show the smallest increase over their own controls, and will stay below the susceptible checks at every scoring date.</p>
+    </div>
+</div>
+
+<div class="prompt-ladder">
+
+<div class="prompt-step">
+  <p class="prompt-step-head"><span class="prompt-step-number">1</span> In a browser chatbot</p>
+  <p class="prompt-step-context">Open the CSV, copy the first few lines, paste them into the chat and ask. No file is uploaded and the tool has no access to your computer.</p>
+</div>
+
+```text title="Prompt 1 — paste the header"
+genotype,checkId,Plot,Inoc,Rep,Row,Col,Block,Sev11,Sev13,Sev15,Sev17
+NA,Salmon,2,I,1,1,2,1,3,3.33,4.33,5.33
+JG24,noCheck,3,I,1,1,3,1,1,1.67,4,4.33
+JG18,noCheck,4,I,1,1,4,1,0.33,0.33,0.33,NA
+
+write R code to compare inoculated vs control
+```
+
+<div class="prompt-step">
+  <p class="prompt-step-head"><span class="prompt-step-number">2</span> In a browser chatbot, attaching the files</p>
+  <p class="prompt-step-context">Same question, but now the assistant can open the files.</p>
+</div>
+
+```text title="Prompt 2 — just the question"
+compare inoculated vs control for disease severity
+```
+
+<div class="prompt-step">
+  <p class="prompt-step-head"><span class="prompt-step-number">3</span> In the VS Code extension, with context</p>
+  <p class="prompt-step-context">The same request, written the way we are usually told to write it: the file, the columns, the design, and one instruction about how to answer.</p>
+</div>
+
+```text title="Prompt 3 — the careful version"
+I have a raspberry field trial scored for late leaf rust. The file Data/DataS6.csv has one row 
+per plot: Inoc is the treatment, Sev11 to Sev17 are severity scores at 11, 13, 15 and 17 days 
+after inoculation, and the trial has replicates and blocks.
+
+Test whether inoculated plots reach higher severity than control plots at each scoring date. 
+Explain what you plan to do before writing any code.
+```
+</div>
+
+<strong>Before reading the answers:</strong> which of the three do you expect to be the most reliable, and why?
+
+<div class="hypothesis-grid">
+    <div class="hypothesis-card hypothesis-card--featured">
+
+      <div class="incident-heading">
+          <p class="path-badge path-badge--a">Vegetation indices capture rust damage at the canopy level.</p>
+      </div>
+         <p class="hypothesis-body">Rust lesions destroy photosynthetically active tissue, so NDVI and OSAVI will decrease as visual severity increases. The association will be weak at the early scoring dates, when lesions are too small to alter canopy reflectance, and strengthen as damage accumulates.</p>
+    </div>
+</div>
+
+The severity scores and the VI values are in separate files. The first step is to merge them and how you ask for that turns out to matter more than you think.
+
+<div class="prompt-ladder">
+
+<div class="prompt-step">
+  <p class="prompt-step-head"><span class="prompt-step-number">1</span> The first thing most people write (probably)</p>
+  <p class="prompt-step-context">Both files are named, the goal is clear, and the request is one sentence.</p>
+</div>
+
+```text title="Prompt 1 — merge and correlate"
+I have two files. Data/DataS6.csv has disease severity scores and Data/DataS7.csv
+has NDVI and OSAVI from drone images of the same trial.
+
+Merge them and calculate the correlation between NDVI and disease severity.
+```
+
+<div class="prompt-step">
+  <p class="prompt-step-head"><span class="prompt-step-number">2</span> Asking what has to happen first</p>
+  <p class="prompt-step-context">Same data, same goal. The difference is that this one does not ask for the answer yet.</p>
+</div>
+
+```text title="Prompt 2 — inspect before joining"
+I have a raspberry field trial scored for late leaf rust.
+
+Data/DataS6.csv has one row per plot, with severity scored by eye at four dates
+(Sev11 to Sev17, in days after inoculation).
+Data/DataS7.csv has one row per plot per flight, with NDVI and OSAVI from drone
+imagery, and a column pheno giving the time point.
+
+I want to test whether NDVI and OSAVI decrease as visual severity increases, at
+each scoring date separately.
+
+Before writing any code: open both files and tell me what has to be resolved
+before these two tables can be joined. List what you find, including anything
+that would silently change the number of rows. Do not write code yet.
+```
+
+</div>
